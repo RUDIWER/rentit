@@ -12,7 +12,6 @@ use App\Models\User;
 use App\Models\Profile;
 
 
-
 class ProfileController extends Controllerindex
 {
     public function index() {
