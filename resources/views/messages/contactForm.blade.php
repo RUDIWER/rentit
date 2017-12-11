@@ -19,9 +19,9 @@
                                 <br>
                             </div>
                             <div class="row h-100 justify-content-center align-items-center"> 
-                                <i class="material-icons" style="font-size: 50px">lock</i>  
+                                <i class="material-icons" style="font-size: 50px">contact_mail</i>  
                                 &nbsp  
-                                {{__('rw_login.contact_title')}} {{ $loggedInUser->nickname }}   
+                                {{__('rw_login.contact_title')}} {{ $receiver->nickname }}   
                             </div>
                         </h4>
                     </div>
@@ -30,22 +30,20 @@
                     <div class="card-body">                     
                         <div class="alert alert-danger">
                             OPGELET !!!<br>
-                            Neem geen contactgegevens op (zoals e-mailadres, telefoonnumer, enz.) in je bericht.<br> 
+                            Neem geen contactgegevens op (zoals e-mailadres, Postadres, telefoonnumer, enz.) in je bericht.<br> 
                             Berichten die contactgegevens bevatten worden niet afgeleverd.<br> 
                             Voor je eigen veiligheid raden we je aan om alle communicatie en boekingen via ons platform te laten verlopen.
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">                              
                                 <label for="mail_text" class="col-form-label text-primary">{{__('rw_login.mail_text')}}</label>
-                                <textarea type="text" class="form-control rw-input" rows="10" id="mail_text" name="mail_text"></textarea> 
+                                <textarea type="text" class="form-control rw-input" rows="10" id="message" name="message"></textarea> 
                             </div>
                         </div> 
-                    </div>
-               
+                    </div>  
                     <div class="card-footer bg-light text-primary text-right">  
                         <button id="submit" type="submit" class="btn btn-primary">
-                                    <i class="material-icons" style="font-size:30px; vertical-align: middle;">mail_outlineslime</i>  
-                                    {{__('rw_login.send')}}
+                            <i class="material-icons" style="font-size:30px; vertical-align: middle;">mail_outline</i>{{__('rw_login.send')}}
                         </button>
                     </div>
                  </div>
@@ -56,7 +54,7 @@
 
 <script>
 window.onload = function() {
-  document.getElementById("email").focus();
+  document.getElementById("message").focus();
 };
 </script>
 @endsection

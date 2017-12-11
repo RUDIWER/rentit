@@ -89,22 +89,6 @@ class ProfileController extends Controller
         session()->flash('msg', 'success');
         return redirect()->back()->withInput();
     }
-
-    public function contact($idUser)
-    {
-        $loggedInUserId = Auth::id();
-        if ($loggedInUserId) {
-            $loggedInUser = User::find($loggedInUserId);
-            $loggedInProfile = $loggedInUser->profile;
-        }
-        $userId = Auth::id();
-        $user = User::find($userId);
-        $profile = $user->profile;
-
-        if ($loggedInUserId) {
-            return view('profile.contactForm', compact('loggedInUser', 'loggedInProfile', 'profile'));
-        }
-    }
 }
 
      // DD vervanger via ajax ! BELANGRIJK !!!!!
