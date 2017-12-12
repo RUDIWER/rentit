@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Message;
+use App\Notifications\ReceivedMessage;
 
 class MessageController extends Controller
 {
@@ -56,8 +57,14 @@ class MessageController extends Controller
         $message->created_at = date('Y-m-d H:i:s');
         $message->updated_at = date('Y-m-d H:i:s');
         $message->save();
+        // Notification
+        $receiver->notify(new ReceivedMessage());
 
         session()->flash('msg', 'success');
         return redirect()->back()->withInput();
+    }
+
+    public function inbox()
+    {
     }
 }

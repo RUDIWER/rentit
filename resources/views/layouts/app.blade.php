@@ -34,18 +34,28 @@
                             <li class="nav-item active"><a class="nav-link" href="{{ route('login') }}">{{__('rw_login.login')}}</a></li>
                             <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">{{__('rw_login.register')}}</a></li>
                     @else
+                <!-- Profiel Picture -->
                         <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <img src="{{ $profile->picture }}" width="30px" height="30px" class="rounded-circle"/>
                             </a>
                         </li>
+                <!-- Profile dropdown -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ Auth::user()->nickname }}
+                                {{ Auth::user()->nickname }}&nbsp 
+                                @if(count( Auth::user()->notifications))
+                                    <span class="badge badge-danger badge-pill">{{count( Auth::user()->notifications)}}</span>
+                                @endif
                             </a>
+                          
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="{{ url('/my-profile') }}">{{__('rw_login.profile')}}</a> 
                                 <a class="dropdown-item" href="{{ url('/my-products') }}">{{__('rw_login.products')}}</a>  
+                                <a class="dropdown-item" href="{{ url('/my-messages/inbox') }}">{{__('rw_login.messages')}}&nbsp&nbsp&nbsp
+                                    @if(count( Auth::user()->notifications))
+                                        <span class="badge badge-danger badge-pill">{{count( Auth::user()->notifications)}}</span></a> 
+                                    @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
