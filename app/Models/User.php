@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-
 class User extends Authenticatable
 {
     use Notifiable;
@@ -16,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'nickname','gender','slug', 'email', 'password'
+        'nickname', 'gender', 'slug', 'email', 'password'
     ];
 
     /**
@@ -36,5 +35,10 @@ class User extends Authenticatable
     public function products()
     {
         return $this->hasMany('App\Models\Product');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany('App\Models\Message', 'receiver_id');
     }
 }

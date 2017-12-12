@@ -15,6 +15,8 @@ class createMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
+            $table->boolean('validated')->default(0);
+            $table->boolean('unread')->default(1);
             $table->string('message', 500);
             $table->string('message_description', 40);
             $table->integer('sender_id')->unsigned();
@@ -23,7 +25,7 @@ class createMessagesTable extends Migration
         });
     }
 
-    /**
+    /**&a²
      * Reverse the migrations.
      *
      * @return void

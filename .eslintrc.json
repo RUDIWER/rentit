@@ -6,8 +6,7 @@
         "node": true
     },
     "extends": [
-        "eslint:recommended",
-        "pugin:vue/recommended"
+        "eslint:recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {

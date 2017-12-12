@@ -2,7 +2,8 @@
 
 @section('content')
 <div class="container h-100">
-    <form class="form" method="POST" action="{{ route('login') }}">
+    <form class="form" method="POST" enctype="multipart/form-data"  action="/message/send/{{ $receiver->id }}">
+    {{ csrf_field() }}
         <div class="row justify-content-md-centerrow justify-content-md-center">
             <div class="col-lg-12">
                 <div class="card card-primary">
@@ -15,7 +16,7 @@
                         </div>
                         <h4>
                             <div class="row h-100 justify-content-center align-items-center"> 
-                                <img src="{{ $profile->picture }}" width="60px" height="60px" class="rounded-circle"/>
+                                <img src="{{ $receiverProfile->picture }}" width="60px" height="60px" class="rounded-circle"/>
                                 <br>
                             </div>
                             <div class="row h-100 justify-content-center align-items-center"> 
@@ -27,20 +28,36 @@
                     </div>
                     </h2>
                     <br>
-                    <div class="card-body">                     
-                        <div class="alert alert-danger">
+                    <div class="card-body"> 
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <h4>{{__('rw_profile.errors')}}</h4>
+                                <br>
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @elseif (\Session::has('msg'))
+                            <div id="profile-success" class="alert alert-success">    
+                                <h4>{{__('rw_profile.send')}}</h4>   
+                            </div>
+                        @endif  
+                        <div class="form-row">
+                            <div class="form-group col-md-12">                              
+                                <label for="message" class="col-form-label text-primary">{{__('rw_login.mail_text')}}</label>
+                                <textarea type="text" class="form-control rw-input" rows="10" id="message" name="message">{{ old('message') }}</textarea> 
+                            </div>
+                        </div> 
+                        <div class="alert alert-warning">
                             OPGELET !!!<br>
                             Neem geen contactgegevens op (zoals e-mailadres, Postadres, telefoonnumer, enz.) in je bericht.<br> 
                             Berichten die contactgegevens bevatten worden niet afgeleverd.<br> 
                             Voor je eigen veiligheid raden we je aan om alle communicatie en boekingen via ons platform te laten verlopen.
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-12">                              
-                                <label for="mail_text" class="col-form-label text-primary">{{__('rw_login.mail_text')}}</label>
-                                <textarea type="text" class="form-control rw-input" rows="10" id="message" name="message"></textarea> 
-                            </div>
-                        </div> 
                     </div>  
+                   
                     <div class="card-footer bg-light text-primary text-right">  
                         <button id="submit" type="submit" class="btn btn-primary">
                             <i class="material-icons" style="font-size:30px; vertical-align: middle;">mail_outline</i>{{__('rw_login.send')}}
@@ -51,10 +68,19 @@
         </div>
     </form>    
 </div>
+@endsection
+@section('javascript')
+    <script type="text/javascript" charset="utf-8">
+        window.onload = function() {
+        document.getElementById("message").focus();
+        };
 
-<script>
-window.onload = function() {
-  document.getElementById("message").focus();
-};
-</script>
+        $(document).ready(function() {
+            //(RW) Slide UP  alert success messages
+            $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
+                $(".alert-success").alert('close');
+            });
+        });
+
+    </script>
 @endsection

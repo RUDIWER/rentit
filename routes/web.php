@@ -60,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index');
 
     // MESSAGE routes
-    Route::get('/message/edit/{id}', 'Messages\MessageController@index')->name('message.index');
+    Route::get('/message/create/{id}', 'Messages\MessageController@create')->name('message.create');
     Route::post('/message/send/{id}', 'Messages\MessageController@send')->name('message.send');
 
     // Route to profile from logged in user (slug only visible auth:id used to get profile)
