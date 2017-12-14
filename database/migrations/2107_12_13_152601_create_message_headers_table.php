@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMessagesTable extends Migration
+class CreateMessageHeadersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('message_headers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('chain_id')->unsigned();
+            $table->integer('chain_id')->unsigned()->unique();
             $table->boolean('validated')->default(0);
             $table->boolean('unread')->default(1);
-            $table->string('message', 500);
             $table->string('title', 40);
             $table->integer('sender_id')->unsigned();
             $table->integer('receiver_id')->unsigned();
@@ -35,6 +34,6 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('message_headers');
     }
 }

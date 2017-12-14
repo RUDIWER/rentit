@@ -52,7 +52,7 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="{{ url('/my-profile') }}">{{__('rw_login.profile')}}</a> 
                                 <a class="dropdown-item" href="{{ url('/my-products') }}">{{__('rw_login.products')}}</a>  
-                                <a class="dropdown-item" href="{{ url('/my-messages/inbox') }}">{{__('rw_login.messages')}}&nbsp&nbsp&nbsp
+                                <a class="dropdown-item" href="{{ url('/my-messages') }}">{{__('rw_login.messages')}}&nbsp&nbsp&nbsp
                                     @if(count( Auth::user()->notifications))
                                         <span class="badge badge-danger badge-pill">{{count( Auth::user()->notifications)}}</span></a> 
                                     @endif

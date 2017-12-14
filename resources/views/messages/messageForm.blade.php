@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container h-100">
-    <form class="form" method="POST" enctype="multipart/form-data"  action="/message/send/{{ $receiver->id }}">
+    <form class="form" method="POST" enctype="multipart/form-data"  action="/message/send/{{ $receiver->id }}/{{ $chain }}">
     {{ csrf_field() }}
         <div class="row justify-content-md-centerrow justify-content-md-center">
             <div class="col-lg-12">
@@ -29,6 +29,9 @@
                     </h2>
                     <br>
                     <div class="card-body"> 
+                        @if($chain)
+                            THIS IS A REPLY MESSAGE !!!!
+                        @endif
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <h4>{{__('rw_profile.errors')}}</h4>

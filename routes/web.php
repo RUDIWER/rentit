@@ -60,8 +60,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', 'HomeController@index');
 
     // MESSAGE routes
-    Route::get('/message/create/{id}', 'Messages\MessageController@create')->name('message.create');
-    Route::post('/message/send/{id}', 'Messages\MessageController@send')->name('message.send');
+    Route::get('/message/create/{id}/{chain_id}', 'Messages\MessageController@create')->name('message.create');
+    Route::post('/message/send/{id}/{chain_id}', 'Messages\MessageController@send')->name('message.send');
 
     // Route to profile from logged in user (slug only visible auth:id used to get profile)
     Route::get('/my-profile', 'Profile\ProfileController@index')->name('profile');
@@ -70,7 +70,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/my-profile/uploadpicture', 'Profile\ProfileController@uploadPicture');
 
     //Routes to messages from logged in user
-    Route::get('/my-messages/inbox', 'Messages\MessageController@inbox')->name('message.inbox');
+    Route::get('/my-messages', 'Messages\MessageController@messageList')->name('my-messages.list');
 
     // PRODUCT Routes to products from logged in user (slug only visible auth:id used to get profile)
     Route::get('/my-products', 'Products\ProductController@list')->name('my-products.list');

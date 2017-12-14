@@ -53,5 +53,5 @@ return [
     'contact_title' => 'Contacteer verhuurder',
     'mail_text' => 'Uw bericht aan de verhuurder:',
     'send' => 'Verstuur',
-    'messages' => 'berichten',
+    'messages' => 'Postvak in',
 ];

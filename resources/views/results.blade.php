@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="col-md-4 pull-right rw-header">
                                         <img src="{{ $product->user->profile->picture }}" width="70px" height="70px" class="rw-icons rounded-circle pull-right"/>
-                                        <a class="card-text" href="{{ route('message.create',['id'=> $product->user->id])}}"><b><i class="material-icons rw-icons">person</i> {{ $product->user->nickname }}</b><br>
+                                        <a class="card-text" href="{{ route('message.create',['id'=> $product->user->id, 'chain' => 0])}}"><b><i class="material-icons rw-icons">person</i> {{ $product->user->nickname }}</b><br>
                                         <a class="card-text"><i class="material-icons rw-icons">place</i> {{ $product->user->profile->addr1_postcode }} - {{ $product->user->profile->addr1_city }} ({{ $product->user->profile->addr1_country }})</a><br>  
                                          @if($product->user->profile->company == 0)
                                             <a class="card-text"><i class="material-icons rw-icons">info</i> {{__('rw_results.particulier')}} </a>
