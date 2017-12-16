@@ -49,12 +49,18 @@
                         @endif  
                         <div class="form-row">
                             <div class="form-group col-md-12">                              
+                                <label for="title" class="col-form-label text-primary">{{__('rw_messaging.title_label')}}</label>
+                                <input type="text" class="form-control rw-input" id="title" name="title"  value="{{ old('title', $title )}}"/>
+                            </div>
+                        </div> 
+                        <div class="form-row">
+                            <div class="form-group col-md-12">                              
                                 <label for="message" class="col-form-label text-primary">{{__('rw_login.mail_text')}}</label>
                                 <textarea type="text" class="form-control rw-input" rows="10" id="message" name="message">{{ old('message') }}</textarea> 
                             </div>
                         </div> 
                         <div class="alert alert-warning">
-                            OPGELET !!!<br>
+                            <b>OPGELET !!!</b><br>
                             Neem geen contactgegevens op (zoals e-mailadres, Postadres, telefoonnumer, enz.) in je bericht.<br> 
                             Berichten die contactgegevens bevatten worden niet afgeleverd.<br> 
                             Voor je eigen veiligheid raden we je aan om alle communicatie en boekingen via ons platform te laten verlopen.

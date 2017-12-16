@@ -19,7 +19,7 @@ class CreateMessagesTable extends Migration
             $table->boolean('validated')->default(0);
             $table->boolean('unread')->default(1);
             $table->string('message', 500);
-            $table->string('title', 40);
+            $table->string('title', 100);
             $table->integer('sender_id')->unsigned();
             $table->integer('receiver_id')->unsigned();
             $table->string('sender_nickname');

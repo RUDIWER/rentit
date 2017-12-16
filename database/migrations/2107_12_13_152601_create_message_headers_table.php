@@ -18,11 +18,9 @@ class CreateMessageHeadersTable extends Migration
             $table->integer('chain_id')->unsigned()->unique();
             $table->boolean('validated')->default(0);
             $table->boolean('unread')->default(1);
-            $table->string('title', 40);
+            $table->string('title', 60);
             $table->integer('sender_id')->unsigned();
             $table->integer('receiver_id')->unsigned();
-            $table->string('sender_nickname');
-            $table->string('receiver_nickname');
             $table->timestamps();
         });
     }

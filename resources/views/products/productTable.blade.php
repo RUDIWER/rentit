@@ -22,8 +22,9 @@
                     </div>
                    
                     <div class="card-body"> 
-                        <div class="row justify-content-md-center">    
-                            <table id="productTable" class="table table-bordered table-hover table-responsive" cellspacing="0" width="100%">
+                        <div class="row justify-content-md-center"> 
+                            <div id="dataTableWrapper" style="width:100%" class="dataTableParentHidden">
+                            <table id="productTable" class="dn table table-bordered table-hover table-responsive" cellspacing="0" width="100%">
                                 <thead class="thead-default">
                                     <tr>
                                         <th>id</th>
@@ -41,6 +42,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
                     <div class="card-footer bg-light text-primary text-right"> 
@@ -81,7 +83,9 @@ $(document).ready(function() {
                                     "searchable": false
                                 },
                             ]
+                                  
     });
+    $('#dataTableWrapper').removeClass('dataTableParentHidden');
 
     //(RW) Click on table row
     $('#productTable').on('click', 'tr', function () {
