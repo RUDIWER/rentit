@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Product;
-use App\Models\MessageHeader;
 use App\Models\Message;
 use App\Notifications\ReceivedMessage;
 
@@ -23,25 +22,29 @@ class MessageController extends Controller
             $senderProfile = $sender->profile;
             $profile = $senderProfile;
         }
-
         $receiver = User::find($receiverId);
-        $receiverProfile = $receiver->profile;
-
         $product = Product::find($productId);
-
-        $title = trans('rw_messaging.subject_1') . $product->title . ' (id: ' . $product->id . ')';
-
-        if ($userId) {
-            return view('messages.messageForm', compact('sender', 'senderProfile', 'receiver', 'receiverProfile', 'profile', 'title', 'chain'));
+        if ($chain == 0) {   // New message
+            $title = trans('rw_messaging.subject_1') . $product->title . ' (id: ' . $product->id . ')';
+        } else {       // Reply Message
+            $lastMessage = Message::latest('chain_id')->first();
+            $title = $lastMessage->title;
+        }
+        if ($receiver->id == $userId) {  // No messages to your own !
+            session()->flash('message.level', 'danger');
+            session()->flash('message.content', __('rw_messaging.alert_message'));
+            return view('layouts.alert', compact('profile'));
+        } elseif ($userId) {
+            return view('messages.messageForm', compact('new', 'sender', 'senderProfile', 'receiver', 'profile', 'title', 'chain'));
+        } else {
+            return view('auth.login');
         }
     }
 
     public function send(Request $request, $idReceiver, $chain)  // send = Save Record !
     {
-        //dd($new);
         $this->validate(request(), [
             'message' => 'required|max:500',
-            'title' => 'required|max:100'
         ]);
         $userId = Auth::id();
         if ($userId) {
@@ -53,64 +56,107 @@ class MessageController extends Controller
 
         $receiver = User::find($idReceiver);
         $receiverProfile = $receiver->profile;
-        $message = new Message;
+        // When send a message create 2 records in messages one for sender one for receiver each with own owner_id
+        // So is it possible that each delete his own posts !
+        $messageSender = new Message;
+        $messageReceiver = new Message;
 
         // chain_id is used to group messages in conversations !
         // If new message chain = 0 and on save new chain_id is created
-        // If new Chain also messageHeader is created as to pof a new chain of messages
         if ($chain == 0) {
             $lastMessage = Message::latest('chain_id')->first();
             if ($lastMessage) {
                 $lastChainId = $lastMessage->chain_id;
                 $newChainId = $lastChainId + 1;
             } else {
-                $newChainId = 1;
+                $newChainId = 1;  // Only by creating first email ever !
             }
-            $message->chain_id = $newChainId;
-            //create new messageHeader
-            $messageHeader = new MessageHeader;
-            $messageHeader->chain_id = $newChainId;
-            $messageHeader->validated = 0;
-            $messageHeader->unread = 1;
-            $messageHeader->title = $request->title;
-            $messageHeader->sender_id = $sender->id;
-            $messageHeader->receiver_id = $receiver->id;
-            $messageHeader->created_at = date('Y-m-d H:i:s');
-            $messageHeader->updated_at = date('Y-m-d H:i:s');
-            $messageHeader->save();
+            $messageSender->chain_id = $newChainId;
+            $messageReceiver->chain_id = $newChainId;
         } else {
-            // existing message chain_id = chain from previous message
-            $messageHeader = MessageHeader::where('chain_id', '=', "$chain")->first();
-            $messageHeader->updated_at = date('Y-m-d H:i:s');
-            $messageHeader->unread = 1;
-            $messageHeader->save();
-            $message->chain_id = $chain;
+            $messageSender->chain_id = $chain;
+            $messageReceiver->chain_id = $chain;
         }
-        $message->validated = 0;
-        $message->unread = 1;
-        $message->message = $request->message;
-        $message->title = $request->title;
-        $message->sender_id = $sender->id;
-        $message->receiver_id = $receiver->id;
-        $message->created_at = date('Y-m-d H:i:s');
-        $message->updated_at = date('Y-m-d H:i:s');
-        $message->save();
+        $messageSender->validated = 0;
+        $messageReceiver->validated = 0;
+        $messageSender->title = $request->title;
+        $messageReceiver->title = $request->title;
+        $messageReceiver->message = $request->message;
+        $messageSender->message = $request->message;
+        $messageSender->sender_id = $sender->id;
+        $messageReceiver->sender_id = $sender->id;
+        $messageSender->receiver_id = $receiver->id;
+        $messageReceiver->receiver_id = $receiver->id;
+        $messageSender->created_at = date('Y-m-d H:i:s');
+        $messageReceiver->created_at = date('Y-m-d H:i:s');
+        $messageSender->updated_at = date('Y-m-d H:i:s');
+        $messageReceiver->updated_at = date('Y-m-d H:i:s');
+        $messageSender->owner_id = $sender->id;
+        $messageReceiver->owner_id = $receiver->id;
+        $messageSender->unread = 0;
+        $messageReceiver->unread = 1;
+        $messageSender->save();
+        $messageReceiver->save();
         // Notification
         $receiver->notify(new ReceivedMessage());
-
         session()->flash('msg', 'success');
         return redirect()->back()->withInput();
     }
 
-    public function messageHeaderTable()
+    public function inboxList()
     {
         $userId = Auth::id();
         $user = User::find($userId);
         $profile = $user->profile;
-        $messageHeaders = MessageHeader::where('sender_id', '=', "$userId")
-                            ->orWhere('receiver_id', '=', "$userId")
-                            ->orderBy('updated_at', 'DESC')
-                            ->get();
-        return view('messages.messageHeaderTable', compact('user', 'profile', 'messageHeaders'));
+        $messages = Message::where('owner_id', '=', "$userId")->where('receiver_id', '=', "$userId")->orderBy('id', 'DESC')->get();
+        $sentBox = 0;
+
+        return view('messages.messageList', compact('user', 'profile', 'messages', 'sentBox'));
+    }
+
+    public function sentBoxList()
+    {
+        $userId = Auth::id();
+        $user = User::find($userId);
+        $profile = $user->profile;
+        $messages = Message::where('owner_id', '=', "$userId")->where('sender_id', '=', "$userId")->orderBy('id', 'DESC')->get();
+        $sentBox = 1;
+
+        return view('messages.messageList', compact('user', 'profile', 'messages', 'sentBox'));
+    }
+
+    public function view($messageId)
+    {
+        $new = 0;
+        $userId = Auth::id();
+        $user = User::find($userId);
+        $profile = $user->profile;
+        $message = Message::find($messageId);
+        // Disable Notification and set message as Read
+        if ($message->unread == 1) {
+            if ($user->notifications()->where('type', 'App\Notifications\ReceivedMessage')->where('notifiable_id', $userId)->first()) {
+                $user->notifications()->where('type', 'App\Notifications\ReceivedMessage')->where('notifiable_id', $userId)->first()->delete();
+            }
+            $message->unread = 0;
+            $message->save();
+        }
+        if ($userId) {
+            return view('messages.messageView', compact('new', 'message', 'profile', 'userId'));
+        } else {
+            return view('auth.login');
+        }
+    }
+
+    public function delete($messageId)
+    {
+        $userId = Auth::id();
+        $user = User::find($userId);
+        $profile = $user->profile;
+        $message = Message::find($messageId);
+        $message->delete();
+
+        // Nog verder uitwerken (RW)
+
+        return view('messages.messageList', compact('user', 'profile', 'messages', 'sentBox'));
     }
 }

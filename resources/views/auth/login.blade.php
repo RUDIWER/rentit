@@ -2,26 +2,32 @@
 
 @section('content')
 <div class="container h-100">
-    <form class="form" method="POST" action="{{ route('login') }}">
+    <form id="loginForm" class="form" method="POST" action="{{ route('login') }}">
         <div class="row justify-content-md-centerrow justify-content-md-center">
             <div class="col-lg-6">
                 <div class="card card-primary">
-                    <div class="card-header text-white bg-primary rw-title">
-                        <div class="rw-icons">
-                            <i class="material-icons">arrow_back</i> 
-                            <a class="text-white" href="/">
-                                {{__('rw_profile.back')}}
-                            </a>
-                        </div>
-                        <h4>
+                    <div class="card-header text-white bg-primary rw-title" style="padding-top:7px; padding-bottom:0px;">
+                        <h5>
                             <div class="row h-100 justify-content-center align-items-center"> 
-                                <i class="material-icons" style="font-size: 50px">lock</i>  
+                                <i class="material-icons" style="font-size: 40px">lock</i>  
                                 &nbsp  
                                 {{__('rw_login.login')}}
                             </div>
-                        </h4>
+                        </h5>
                     </div>
-                    </h2>
+        <!-- BUTTON BAR  -->
+                    <div class="card-header rw-buttonbar">  
+                        <b>                      
+                            <a class="rw-icons rw-grey" href="/">
+                                <i class="material-icons">arrow_back</i> 
+                                {{__('rw_profile.back')}}
+                            </a>
+                            <a class="rw-icons rw-grey pull-right" href="javascript:{}" onclick="document.getElementById('loginForm').submit(); return false;">
+                                <i class="material-icons">done</i> 
+                                {{__('rw_login.login')}}
+                            </a>
+                        </b> 
+                    </div>                      
                     <br>
                     <div class="card-body">
                         {{ csrf_field() }}
@@ -65,15 +71,10 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>              
-                    </div>
-                    <div class="card-footer  bg-light text-primary text-right">                             
-                        <a class="btn btn-link" href="{{ route('password.request') }}">
+                        </div> 
+                        <a class="btn btn-link pull-right" href="{{ route('password.request') }}">
                             {{__('rw_login.forgot_password')}}
-                        </a>
-                        <button type="submit" class="btn btn-primary">
-                        {{__('rw_login.login')}}
-                        </button>         
+                        </a>             
                     </div>
                 </div>
             </div>

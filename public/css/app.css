@@ -235,12 +235,31 @@ a:active {
   font-weight: bold;
 }
 
+.btn-bd-purple:hover,
+.btn-bd-purple:active {
+  color: #fff;
+  background-color: #3097D1;
+  border-color: #3097D1;
+}
+
 .rw-orange {
   color: #ff5733;
 }
 
+.rw-grey {
+  color: #636b6f;
+}
+
+.rw-red {
+  color: #b91818;
+}
+
 .rw-text-grey {
   color: #636b6f;
+}
+
+.rw-text-blue {
+  color: #283593;
 }
 
 .rw-blue {
@@ -262,7 +281,16 @@ a:active {
 
 .rw-title {
   font-family: 'Raleway', sans-serif;
-  font-weight: 100;
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+.rw-buttonbar {
+  color: #3097D1;
+  background-color: #f8f7f7;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.2em;
+  font-weight: 400;
 }
 
 .input-group {
@@ -288,7 +316,7 @@ a:active {
 .rw-input {
   font-family: 'Raleway', sans-serif;
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 1.2em;
 }
 
 .rw-scrolly {

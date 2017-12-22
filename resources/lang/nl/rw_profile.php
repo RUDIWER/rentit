@@ -8,7 +8,7 @@ return [
     */
     'back' => 'Terug',
     'select' => 'Selecteer...',
-    'header' => 'Profielgegevens aanpassen',
+    'header' => 'Mijn profiel',
     'email' => 'E-mail adres',
     'ph_email' => 'voorbeeld@voorbeeld.com',
     'share_email' => 'Wij geven NOOIT uw email adres door aan derden !',

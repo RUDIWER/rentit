@@ -10,23 +10,26 @@
         <div class="row justify-content-md-centerrow justify-content-md-center">  
             <div class="col-md-12">
                 <div class="h-100 card card-primary">
-                    <div class="card-header text-white bg-primary rw-title">
-                        <div class="rw-icons">
-                            <i class="material-icons">arrow_back</i> 
-                            <a class="text-white" href="javascript:history.back()">
-                                {{__('rw_products.back')}}
-                            </a>
-                        </div>
-                        <h4>
+                    <div class="card-header text-white bg-primary rw-title" style="padding-top:7px; padding-bottom:0px;">
+                        <h5>
                             <div class="row h-100 justify-content-center align-items-center">  
-                                <i class="material-icons" style="font-size: 50px">card_giftcard</i>     
+                                <i class="material-icons" style="font-size: 40px">card_giftcard</i>     
                             </div>
-                        </h4>
+                        </h5>
                     </div>
+        <!-- BUTTON BAR  -->
+                    <div class="card-header rw-buttonbar">  
+                        <b>                      
+                            <a class="rw-icons rw-grey" href="javascript:history.back()">
+                                <i class="material-icons">arrow_back</i> 
+                                {{__('rw_products.back')}}
+                            </a>  
+                        </b>
+                    </div> 
                     <div class="card-body rw-body">
                         <div class="row">
                             <div class="col-md-6 pull-left rw-header">
-                                <h4 class="rw-orange">{{ $product->title }}</h4> 
+                                <h5 class="rw-orange">{{ $product->title }}</h5> 
                             </div> 
                             <div class="col-md-6 pull-right rw-header">
                                 <button type="button" class="btn btn-large btn-outline-success pull-right">

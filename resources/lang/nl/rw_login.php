@@ -10,13 +10,13 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'login' => 'Inloggen',
+    'login' => 'Aanmelden',
     'register' => 'Registreer U',
     'home_page' => 'Home pagina',
     'welcome' => 'Welkom op de Home pagina',
     'profile' => 'Mijn profiel',
     'products' => 'Mijn producten',
-    'logout' => 'Uitloggen',
+    'logout' => 'Afmelden',
     'nickname' => 'Roepnaam (Dit mag niet uw echte naam zijn !)',
     'ph_nickname' => 'vb : Mickey Mouse',
     'nickname_help' => 'Dit mag NIET uw echte naam zijn !!!',
@@ -32,9 +32,9 @@ return [
     'remember_me' => 'Onthoud mij',
     'forgot_password' => 'Paswoord vergeten ?',
     'failed' => 'Deze combinatie van e-mailadres en wachtwoord is niet geldig.',
-    'throttle' => 'Te veel mislukte loginpogingen. Probeer het over :seconds seconden nogmaals.',
-    'save' => 'Opslaan',
-    'delete' => 'Verwijderen',
+    'throttle' => 'Te veel mislukte pogingen. Probeer het over :seconds seconden nogmaals.',
+    'save' => 'Bewaar',
+    'delete' => 'Verwijder',
     'pic_image_format' => 'Er kunnen alleen bestanden met .gif .png .jpg of .jpeg extentie gebruikt worden !!!',
     'pic_max_size' => 'Een afbeelding mag max. 2 MB groot zijn !!!',
     'pic_file_size' => 'Een afbeelding mag max. 2 MB groot zijn !!!',
@@ -54,4 +54,5 @@ return [
     'mail_text' => 'Uw bericht aan de verhuurder:',
     'send' => 'Verstuur',
     'messages' => 'Postvak in',
+    'needed' => 'aanmelden verplicht !'
 ];

@@ -11,22 +11,29 @@
         <div class="row justify-content-md-centerrow justify-content-md-center">  
             <div class="col-lg-12">
                 <div class="h-100 card card-primary">
-                    <div class="card-header text-white bg-primary rw-title">
-                        <div class="rw-icons">
-                            <i class="material-icons">arrow_back</i> 
-                            <a class="text-white" href="{{ route('home') }}">
-                                {{__('rw_profile.back')}}
-                            </a>
-                        </div>
-                        <h4>
+                    <div class="card-header text-white bg-primary rw-title" style="padding-top:7px; padding-bottom:0px;">
+                        <h5>
                             <div class="row h-100 justify-content-center align-items-center">  
-                                <i class="material-icons" style="font-size: 50px">account_circle</i>  
+                                <i class="material-icons" style="font-size: 40px">account_circle</i>  
                                 &nbsp    
                                 {{__('rw_profile.header')}}
                             </div>
-                        </h4>
+                        </h5>
                     </div>
-                    <div class="card-header  bg-light">            
+         <!-- BUTTON BAR  -->
+                    <div class="card-header rw-buttonbar">  
+                        <b>                      
+                            <a class="rw-icons rw-grey" href="{{ route('home') }}">
+                                <i class="material-icons">arrow_back</i> 
+                                {{__('rw_products.back')}}
+                            </a>
+                            <a class="rw-icons rw-grey pull-right" href="javascript:{}" onclick="document.getElementById('profileForm').submit(); return false;">
+                                <i class="material-icons">save</i>  
+                                {{__('rw_login.save')}}
+                            </a>         
+                        </b>        
+                    </div>   
+                    <div class="card-header  bg-light" style="padding:0;">            
                         <nav class="nav nav-tabs flex-column flex-sm-row" id="profileTab" role="tablist">
                             <a class="flex-sm-fill text-sm-center nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">{{__('rw_profile.profile')}}</a>
                             <a class="flex-sm-fill text-sm-center nav-item nav-link " id="nav-photo-tab" data-toggle="tab" href="#nav-photo" role="tab" aria-controls="nav-photo" aria-selected="false">{{__('rw_profile.photo')}}</a>
@@ -36,7 +43,7 @@
                     <div class="card-body rw-scrolly"> 
                         @if ($errors->any())
                             <div class="alert alert-danger">
-                                <h4>{{__('rw_profile.errors')}}</h4>
+                                <h5>{{__('rw_profile.errors')}}</h5>
                                 <br>
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -46,7 +53,7 @@
                             </div>
                         @elseif (\Session::has('msg'))
                             <div id="profile-success" class="alert alert-success">    
-                                <h4>{{__('rw_profile.success')}}</h4>   
+                                <h5>{{__('rw_profile.success')}}</h5>   
                             </div>
 
                         @endif
@@ -245,13 +252,7 @@
                                 </div>   
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer bg-light text-primary text-right">                             
-                        <button id="submit" type="submit" class="btn btn-primary">
-                            <i class="material-icons" style="font-size:30px; vertical-align: middle;">save</i>  
-                            {{__('rw_login.save')}}
-                        </button>         
-                    </div>         
+                    </div>     
                 </div>
             </div>
         </div>

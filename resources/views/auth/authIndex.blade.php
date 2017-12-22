@@ -6,22 +6,25 @@
         <div class="row justify-content-md-centerrow justify-content-md-center">
             <div class="col-lg-6">
                 <div class="card card-primary">
-                    <div class="card-header text-white bg-primary rw-title">
-                        <div class="rw-icons">
-                            <i class="material-icons">arrow_back</i> 
-                            <a class="text-white" href="javascript:history.back()">
-                                {{__('rw_profile.back')}}
-                            </a>
-                        </div>
-                        <h4>
+                    <div class="card-header text-white bg-primary rw-title" style="padding-top:7px; padding-bottom:0px;">
+                        <h5>
                             <div class="row h-100 justify-content-center align-items-center"> 
-                                <i class="material-icons" style="font-size: 50px">lock</i>  
+                                <i class="material-icons" style="font-size: 40px">perm_identity</i>  
                                 &nbsp  
-                                {{__('rw_login.')}}
+                                {{__('rw_login.needed')}}
                             </div>
-                        </h4>
+                        </h5>
                     </div>
-                    </h2>
+        <!-- BUTTON BAR  -->
+                    <div class="card-header rw-buttonbar">  
+                        <b>                      
+                            <a class="rw-icons rw-grey" href="javascript:history.back()">
+                                <i class="material-icons">arrow_back</i> 
+                                {{__('rw_products.back')}}
+                            </a>
+
+                    </div>
+                   
                     <br>
                     <div class="card-body">
                         <div class="row h-100 justify-content-center align-items-center"> 
@@ -37,10 +40,4 @@
         </div>
     </form>    
 </div>
-
-<script>
-window.onload = function() {
-  document.getElementById("email").focus();
-};
-</script>
 @endsection

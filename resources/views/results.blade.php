@@ -5,31 +5,35 @@
         <div class="row justify-content-md-centerrow justify-content-md-center">  
             <div class="col-lg-12">
                 <div class="h-100 card card-primary">
-                    <div class="card-header text-white bg-primary rw-title">
-                        <div class="rw-icons">
-                            <i class="material-icons">arrow_back</i> 
-                            <a class="text-white" href="{{ route('home') }}">
-                                {{__('rw_products.back')}}
-                            </a>
-                        </div>
-                        <h4>
+                    <div class="card-header text-white bg-primary rw-title" style="padding-top:7px; padding-bottom:0px;">
+                        <h5>
                             <div class="row h-100 justify-content-center align-items-center">  
-                                <i class="material-icons" style="font-size: 50px">youtube_searched_for</i>  
+                                <i class="material-icons" style="font-size: 40px">youtube_searched_for</i>  
                                 &nbsp    
                                 {{__('rw_results.header')}}
                             </div>
-                        </h4>
-                    </div>
-                   
-                    <div class="card-body">    
+                        </h5>
+                    </div> 
+            <!-- BUTTON BAR  -->
+                    <div class="card-header rw-buttonbar">
+                        <b>
+                        <div class=" rw-icons">                           
+                            <a class="rw-icons rw-grey" href="{{ route('home') }}">
+                                <i class="material-icons">arrow_back</i> 
+                                {{__('rw_products.back')}}
+                            </a>
+                        </div>
+                            </b>
+                    </div>              
+                    <div class="card-body">                      
                         @foreach($products as $product)                                
                             <div id="{{$product->id}}" class="card text-primary mb-3 rw-card-hover product-form"> 
                                 <div class="card-header bg-light rw-header"> 
                                     <div class="col-md-8 pull-left  rw-header ">  
                                         <a href="{{ route('productView',['id'=> $product->id])}}">
-                                            <h4 class="rw-orange">
+                                            <h5 class="rw-orange">
                                                 {{ $product->title }}   
-                                            </h4> 
+                                            </h5> 
                                          </a> 
                                         <h6 class="card-subtitle mb-2 text-muted">
                                         @foreach($categories as $category)       
@@ -98,34 +102,34 @@
                                         <table class="pull-right">
                                             <tr>
                                                 <td>
-                                                    <a class="rw-p-price"><h5 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_hour }} </b></a>
+                                                    <a class="rw-p-price"><h6 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_hour }} </b></a>
                                                 </td>
                                                 <td>
-                                                    <h5><sup>{{__('rw_results.hour')}}</sup></h5>     
+                                                    <h5><sup>{{__('rw_results.hour')}}</sup></h6>     
                                                 </td>  
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class="rw-p-price"><h5 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_day }}</b></a></h5>
+                                                    <a class="rw-p-price"><h6 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_day }}</b></a></h5>
                                                 </td>
                                                 <td>
-                                                    <h5><sup>{{__('rw_results.day')}}</sup></h5> 
+                                                    <h5><sup>{{__('rw_results.day')}}</sup></h6> 
                                                 </td>  
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <a class="rw-p-price"><h5 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_week }}</b></a></h5>
+                                                    <a class="rw-p-price"><h6 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_week }}</b></a></h5>
                                                 </td>
                                                 <td>
-                                                    <h5><sup>{{__('rw_results.week')}}</sup></h5> 
+                                                    <h5><sup>{{__('rw_results.week')}}</sup></h6> 
                                                 </td>  
                                             </tr>
                                              <tr>
                                                 <td>
-                                                    <a class="rw-p-price"><h5 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_month }}</b></a></h5>
+                                                    <a class="rw-p-price"><h6 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_month }}</b></a></h5>
                                                 </td>
                                                 <td>
-                                                    <h5><sup>{{__('rw_results.month')}}</sup></h5> 
+                                                    <h5><sup>{{__('rw_results.month')}}</sup></h6> 
                                                 </td>  
                                             </tr>
                                         </table> 
@@ -142,8 +146,6 @@
                         @endforeach  
                  <!--       {!! $products->appends(Request::except('page'))->render() !!}   -->
                         {!! $products->appends(Request::except('page'))->links('layouts/pagination') !!} 
-                    </div>
-                    <div class="card-footer bg-light text-primary text-right">              
                     </div>
                 </div>
             </div>

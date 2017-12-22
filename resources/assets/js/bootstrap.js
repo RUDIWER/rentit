@@ -30,9 +30,9 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require('axios');
+//(rw) window.axios = require('axios');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+//(rw)  window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -54,13 +54,13 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
-import Echo from 'laravel-echo'
+// (RW) import Echo from 'laravel-echo'
 
-window.Pusher = require('pusher-js');
+// (RW) window.Pusher = require('pusher-js');
 
-window.Echo = new Echo({
-     broadcaster: 'pusher',
-     key: '2d6544419e3825e83eff',
-     cluster: 'eu',
-     encrypted: true
-});
+// window.Echo = new Echo({
+//      broadcaster: 'pusher',
+//      key: '2d6544419e3825e83eff',
+//      cluster: 'eu',
+//      encrypted: true
+// });

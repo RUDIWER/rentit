@@ -2,39 +2,41 @@
 
 @section('content')
 <div class="container h-100">
-    <form class="form" method="POST" enctype="multipart/form-data"  action="/message/send/{{ $receiver->id }}/{{ $chain }}">
+    <form id="mailForm" class="form" method="POST" enctype="multipart/form-data"  action="/message/send/{{ $receiver->id }}/{{ $chain }}">
     {{ csrf_field() }}
         <div class="row justify-content-md-centerrow justify-content-md-center">
             <div class="col-lg-12">
                 <div class="card card-primary">
-                    <div class="card-header text-white bg-primary rw-title">
-                        <div class="rw-icons">
-                            <i class="material-icons">arrow_back</i> 
-                            <a class="text-white" href="javascript:history.back()">
-                                {{__('rw_profile.back')}}
-                            </a>
-                        </div>
-                        <h4>
+                    <div class="card-header text-white bg-primary rw-title" style="padding-top:7px; padding-bottom:0px;">
+                        <h5>
                             <div class="row h-100 justify-content-center align-items-center"> 
-                                <img src="{{ $receiverProfile->picture }}" width="60px" height="60px" class="rounded-circle"/>
-                                <br>
-                            </div>
-                            <div class="row h-100 justify-content-center align-items-center"> 
-                                <i class="material-icons" style="font-size: 50px">contact_mail</i>  
+                                <i class="material-icons" style="font-size: 40px">contact_mail</i>  
                                 &nbsp  
                                 {{__('rw_login.contact_title')}} {{ $receiver->nickname }}   
                             </div>
-                        </h4>
+                        </h5>
                     </div>
-                    </h2>
+        <!-- BUTTON BAR  -->
+                    <div class="card-header rw-buttonbar">  
+                        <b>                      
+                            <a class="rw-icons rw-grey" href="/my-messages/inbox">
+                                <i class="material-icons">arrow_back</i> 
+                                {{__('rw_products.back')}}
+                            </a>
+                            <a class="rw-icons rw-grey pull-right" href="javascript:{}" onclick="document.getElementById('mailForm').submit(); return false;">
+                                <i class="material-icons" style="font-size:30px; vertical-align: middle;">mail_outline</i>
+                                {{__('rw_login.send')}}
+                            </a>
+                        </b>
+                    </div>        
                     <br>
                     <div class="card-body"> 
                         @if($chain)
-                            THIS IS A REPLY MESSAGE !!!!
+                            <h6 class="rw-orange">{{__('rw_messaging.reply_message')}} {{ $receiver->nickname }}  </h6>
                         @endif
                         @if ($errors->any())
                             <div class="alert alert-danger">
-                                <h4>{{__('rw_profile.errors')}}</h4>
+                                <h5>{{__('rw_profile.errors')}}</h5>
                                 <br>
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -44,13 +46,15 @@
                             </div>
                         @elseif (\Session::has('msg'))
                             <div id="profile-success" class="alert alert-success">    
-                                <h4>{{__('rw_profile.send')}}</h4>   
+                                <h5>{{__('rw_profile.send')}}</h5>   
                             </div>
                         @endif  
                         <div class="form-row">
                             <div class="form-group col-md-12">                              
-                                <label for="title" class="col-form-label text-primary">{{__('rw_messaging.title_label')}}</label>
-                                <input type="text" class="form-control rw-input" id="title" name="title"  value="{{ old('title', $title )}}"/>
+                                <label for="title" class="col-form-label text-primary"  style="padding-bottom:1em;">{{__('rw_messaging.title_label')}}</label><br>
+                                <input type="hidden" id="title" name="title" value="{{ old('title', $title) }}"/> 
+
+                                <h6 class="card-subtitle mb-2 text-muted">{{$title}}</h6>
                             </div>
                         </div> 
                         <div class="form-row">
@@ -60,18 +64,13 @@
                             </div>
                         </div> 
                         <div class="alert alert-warning">
-                            <b>OPGELET !!!</b><br>
+                           
+                            <b class="rw-icons"> <i class="material-icons">warning</i>  OPGELET !!!</b><br>
                             Neem geen contactgegevens op (zoals e-mailadres, Postadres, telefoonnumer, enz.) in je bericht.<br> 
                             Berichten die contactgegevens bevatten worden niet afgeleverd.<br> 
                             Voor je eigen veiligheid raden we je aan om alle communicatie en boekingen via ons platform te laten verlopen.
                         </div>
                     </div>  
-                   
-                    <div class="card-footer bg-light text-primary text-right">  
-                        <button id="submit" type="submit" class="btn btn-primary">
-                            <i class="material-icons" style="font-size:30px; vertical-align: middle;">mail_outline</i>{{__('rw_login.send')}}
-                        </button>
-                    </div>
                  </div>
             </div>
         </div>

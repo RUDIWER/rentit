@@ -7,10 +7,10 @@
 
  try {
     window.Popper = require('popper.js').default;
-    require('./bootstrap');
+    require('./bootstrap');   // Load bootstraps javascript
  } catch (e) {}
 
-window.Vue = require('vue');
+//(rw)   window.Vue = require('vue');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -23,7 +23,7 @@ class ProductController extends Controller
         $profile = $user->profile;
         $products = Product::all();
 
-        return view('products.productTable', compact('user', 'profile', 'products'));
+        return view('products.productList', compact('user', 'profile', 'products'));
     }
 
     public function create()
@@ -174,7 +174,7 @@ class ProductController extends Controller
         $product->delete();
         $products = Product::al();
 
-        return view('products.productTable', compact('products', 'userId', 'user', 'profile'));
+        return view('products.productList', compact('products', 'userId', 'user', 'profile'));
     }
 
     public function ajaxGetGroup($groupId)

@@ -16,14 +16,8 @@
             <div class="row justify-content-md-centerrow justify-content-md-center">  
                 <div class="col-lg-12">
                     <div class="h-100 card card-primary">
-                        <div class="card-header text-white bg-primary rw-title">
-                            <div class="rw-icons">
-                                <i class="material-icons">arrow_back</i> 
-                                <a class="text-white" href="{{ route('my-products.list') }}">
-                                    {{__('rw_products.back')}}
-                                </a>
-                            </div>
-                            <h4>
+                        <div class="card-header text-white bg-primary rw-title" style="padding-top:7px; padding-bottom:0px;">
+                            <h5>
                                 <div class="row h-100 justify-content-center align-items-center">  
                                     <i class="material-icons" style="font-size: 50px">card_giftcard</i>  
                                     &nbsp    
@@ -33,11 +27,29 @@
                                             {{__('rw_products.edit_product')}}
                                         @endif
                                 </div>
-                                {{ $product->id }}
-                            </h4>
+                            </h5>
+                        </div>
+            <!-- BUTTON BAR  -->
+                        <div class="card-header rw-buttonbar">  
+                            <b>                      
+                                <a class="rw-icons rw-grey" href="{{ route('my-products.list') }}">
+                                    <i class="material-icons">arrow_back</i> 
+                                    {{__('rw_products.back')}}
+                                </a>                                  
+                                <a class="rw-icons rw-grey pull-right" href="javascript:{}" onclick="document.getElementById('productForm').submit(); return false;">
+                                    <i class="material-icons">save</i>  
+                                    {{__('rw_login.save')}}
+                                </a> 
+                                @if(!$isNew == 1)
+                                    <a id="delete" class="rw-icons rw-red pull-right" href="#" data-toggle="modal" data-target="#exampleModal" >
+                                        <i class="material-icons">delete_forever</i>  
+                                        {{__('rw_login.delete')}}&nbsp&nbsp&nbsp&nbsp&nbsp
+                                    </a>
+                                @endif
+                            </b>       
                         </div>
                         <!-- TAB MENU -->
-                        <div class="card-header  bg-light">            
+                        <div class="card-header  bg-light" style="padding:0;">            
                             <nav class="nav nav-tabs flex-column flex-sm-row" id="productTab" role="tablist">
                                 <a class="flex-sm-fill text-sm-center nav-item nav-link active" id="nav-details-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="true">{{__('rw_products.details')}}</a>
                                 <a class="flex-sm-fill text-sm-center nav-item nav-link " id="nav-prices-tab" data-toggle="tab" href="#nav-prices" role="tab" aria-controls="nav-prices" aria-selected="false">{{__('rw_products.prices')}}</a>
@@ -48,7 +60,7 @@
                         <div class="card-body rw-scrolly">
                              @if ($errors->any())
                                 <div class="alert alert-danger">
-                                    <h4>{{__('rw_profile.errors')}}</h4>
+                                    <h5>{{__('rw_profile.errors')}}</h5>
                                     <br>
                                     <ul>
                                         @foreach ($errors->all() as $error)
@@ -58,7 +70,7 @@
                                 </div>
                             @elseif (\Session::has('msg'))
                                 <div id="profile-success" class="alert alert-success">    
-                                    <h4>{{__('rw_profile.success')}}</h4>   
+                                    <h5>{{__('rw_profile.success')}}</h5>   
                                 </div>
                             @endif
                             <div class="row justify-content-md-center">
@@ -385,16 +397,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card-footer bg-light text-primary text-right">   
-                            <button id="delete" type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                                <i class="material-icons" style="font-size:30px; vertical-align: middle;">delete</i>  
-                                {{__('rw_login.delete')}}
-                            </button>         
-                            <button id="submit" type="submit" class="btn btn-primary">
-                                <i class="material-icons" style="font-size:30px; vertical-align: middle;">save</i>  
-                                {{__('rw_login.save')}}
-                            </button>         
-                        </div> 
                     </div>
                 </div>
             </div>

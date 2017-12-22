@@ -2,25 +2,33 @@
 
 @section('content')
     <div class="container h-100">
-        <form class="form" method="POST" action="{{ route('register') }}">
+        <form id="registerForm" class="form" method="POST" action="{{ route('register') }}">
             {{ csrf_field() }}
             <div class="row justify-content-md-centerrow justify-content-md-center">
                 <div class="col-lg-8">
                     <div class="card card-primary">
-                        <div class="card-header text-white bg-primary rw-title">
-                            <div class="rw-icons">
-                                <i class="material-icons">arrow_back</i> 
-                                <a class="text-white" href="/">
-                                    {{__('rw_profile.back')}}
-                                </a>
-                            </div>
-                            <h4>
+                        <div class="card-header text-white bg-primary rw-title"  style="padding-top:7px; padding-bottom:0px;">
+                            <h5>
                                 <div class="row h-100 justify-content-center align-items-center">  
-                                    <i class="material-icons" style="font-size: 50px">people</i>  
+                                    <i class="material-icons" style="font-size: 40px">people</i>  
                                     &nbsp    
                                     {{__('rw_login.register')}}
                                 </div>
-                            </h4>
+                            </h5>
+                        </div>
+            <!-- BUTTON BAR  -->
+                        <div class="card-header rw-buttonbar">  
+                            <b>                      
+                                <a class="rw-icons rw-grey" href="/">
+                                    <i class="material-icons">arrow_back</i> 
+                                    {{__('rw_products.back')}}
+                                </a>
+                                <a class="rw-icons rw-grey pull-right" href="javascript:{}" onclick="document.getElementById('registerForm').submit(); return false;">
+                                    <i class="material-icons">done</i> 
+
+                                    {{__('rw_login.register')}}
+                                </a>   
+                            </b>    
                         </div>
                         <div class="card-body">
                               @if ($errors->any())
@@ -106,11 +114,6 @@
                                 </div>
                             </div>
                         </div> <!-- End body -->
-                        <div class="card-footer  bg-light text-primary text-right">            
-                            <button type="submit" class="btn btn-primary">
-                            {{__('rw_login.register')}}
-                            </button>                     
-                        </div>
                     </div>
                 </div>
             </div>

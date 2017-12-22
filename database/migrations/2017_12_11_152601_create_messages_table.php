@@ -15,6 +15,7 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('owner_id')->unsigned();
             $table->integer('chain_id')->unsigned();
             $table->boolean('validated')->default(0);
             $table->boolean('unread')->default(1);
@@ -22,8 +23,6 @@ class CreateMessagesTable extends Migration
             $table->string('title', 100);
             $table->integer('sender_id')->unsigned();
             $table->integer('receiver_id')->unsigned();
-            $table->string('sender_nickname');
-            $table->string('receiver_nickname');
             $table->timestamps();
         });
     }
