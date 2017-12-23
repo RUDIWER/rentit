@@ -1,3 +1,9 @@
 {
-    "emmet.triggerExpansionOnTab": true
+    "emmet.triggerExpansionOnTab": true,
+    "highlight-matching-tag.leftStyle": {
+        "borderWidth": "1 0px 1 4px",
+        "borderStyle": "groove",
+        "borderColor": "Red",
+        "borderRadius": "10px"
+    }
 }
