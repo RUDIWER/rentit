@@ -11,7 +11,7 @@
         <div class="row justify-content-md-centerrow justify-content-md-center">  
             <div class="col-lg-12">
                 <div class="h-100 card card-primary">
-                    <div class="card-header text-white bg-primary rw-title" style="padding-top:7px; padding-bottom:0px;">
+                    <div class="card-header text-white bg-primary rw-title" style="padding-top:6px; padding-bottom:0px;">
                         <h5>
                             <div class="row h-100 justify-content-center align-items-center">  
                                 <i class="material-icons" style="font-size: 40px">account_circle</i>  
@@ -21,7 +21,7 @@
                         </h5>
                     </div>
          <!-- BUTTON BAR  -->
-                    <div class="card-header rw-buttonbar">  
+                    <div class="card-header rw-buttonbar" style="padding:5px;">  
                         <b>                      
                             <a class="rw-icons rw-grey" href="{{ route('home') }}">
                                 <i class="material-icons">arrow_back</i> 
@@ -32,12 +32,30 @@
                                 {{__('rw_login.save')}}
                             </a>         
                         </b>        
-                    </div>   
+                    </div>  
+        <!-- TAB MENU --> 
                     <div class="card-header  bg-light" style="padding:0;">            
-                        <nav class="nav nav-tabs flex-column flex-sm-row" id="profileTab" role="tablist">
-                            <a class="flex-sm-fill text-sm-center nav-item nav-link active" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">{{__('rw_profile.profile')}}</a>
-                            <a class="flex-sm-fill text-sm-center nav-item nav-link " id="nav-photo-tab" data-toggle="tab" href="#nav-photo" role="tab" aria-controls="nav-photo" aria-selected="false">{{__('rw_profile.photo')}}</a>
-                            <a class="flex-sm-fill text-sm-center nav-item nav-link" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="false">{{__('rw_profile.user')}}</a>
+                        <nav class="nav nav-tabs" id="profileTab" role="tablist">
+                            <a class="nav-item nav-link active"  style="padding:5px;" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">
+                                <span class = "rw-icons"> 
+                                    <i class="material-icons" style="text-align:center;">info</i>
+                                    <span class="rw-desktop">{{__('rw_profile.profile')}}</span>
+                                </span>
+                            </a>
+                            &nbsp
+                            <a class="nav-item nav-link"  style="padding:5px;" id="nav-photo-tab" data-toggle="tab" href="#nav-photo" role="tab" aria-controls="nav-photo" aria-selected="true">
+                                <span class = "rw-icons"> 
+                                    <i class="material-icons" style="text-align:center;">photo_camera</i>
+                                    <span class="rw-desktop">{{__('rw_profile.photo')}}</span>
+                                </span>
+                            </a>
+                            &nbsp
+                            <a class="nav-item nav-link"  style="padding:5px;" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">
+                                <span class = "rw-icons"> 
+                                    <i class="material-icons" style="text-align:center;">verified_user</i>
+                                    <span class="rw-desktop">{{__('rw_profile.user')}}</span>
+                                </span>
+                            </a>
                         </nav>
                     </div> 
                     <div class="card-body rw-scrolly"> 

@@ -19,6 +19,13 @@
 //(RW) USE MARTERIALIZE CC
 //@import '~materialize-css/dist/css/materialize.min.css';
 
+//(RW° Display only on desktop screens
+@media only screen and (max-width: 1026px) {
+    .rw-desktop {
+        display: none;
+    }
+}
+
 
 
 
@@ -111,7 +118,6 @@ a:link    {
     font-family: 'Raleway', sans-serif;
     font-size: 1.2em;
     font-weight: 400;
-
 }
 
 .input-group {
@@ -136,8 +142,10 @@ a:link    {
 
 .rw-scrolly {
     overflow-y: auto;
-    max-height: 30em;
+    max-height: 35em;
 }
+
+
 
 .rw-prd-text {
     padding: 1em;
@@ -300,5 +308,7 @@ table.dataTable thead th {
 
   .thumbnail{
     padding:4px;
-}
+ }
+
+
 

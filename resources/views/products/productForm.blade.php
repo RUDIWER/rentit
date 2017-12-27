@@ -16,7 +16,7 @@
             <div class="row justify-content-md-centerrow justify-content-md-center">  
                 <div class="col-lg-12">
                     <div class="h-100 card card-primary">
-                        <div class="card-header text-white bg-primary rw-title" style="padding-top:7px; padding-bottom:0px;">
+                        <div class="card-header text-white bg-primary rw-title" style="padding-top:6px; padding-bottom:0px;">
                             <h5>
                                 <div class="row h-100 justify-content-center align-items-center">  
                                     <i class="material-icons" style="font-size: 50px">card_giftcard</i>  
@@ -30,11 +30,11 @@
                             </h5>
                         </div>
             <!-- BUTTON BAR  -->
-                        <div class="card-header rw-buttonbar">  
+                        <div class="card-header rw-buttonbar" style="padding:5px;">  
                             <b>                      
                                 <a class="rw-icons rw-grey" href="{{ route('my-products.list') }}">
                                     <i class="material-icons">arrow_back</i> 
-                                    {{__('rw_products.back')}}
+                                    {{__('rw_products.back')}} 
                                 </a>                                  
                                 <a class="rw-icons rw-grey pull-right" href="javascript:{}" onclick="document.getElementById('productForm').submit(); return false;">
                                     <i class="material-icons">save</i>  
@@ -48,13 +48,36 @@
                                 @endif
                             </b>       
                         </div>
-                        <!-- TAB MENU -->
+             <!-- TAB MENU -->
                         <div class="card-header  bg-light" style="padding:0;">            
-                            <nav class="nav nav-tabs flex-column flex-sm-row" id="productTab" role="tablist">
-                                <a class="flex-sm-fill text-sm-center nav-item nav-link active" id="nav-details-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="true">{{__('rw_products.details')}}</a>
-                                <a class="flex-sm-fill text-sm-center nav-item nav-link " id="nav-prices-tab" data-toggle="tab" href="#nav-prices" role="tab" aria-controls="nav-prices" aria-selected="false">{{__('rw_products.prices')}}</a>
-                                <a class="flex-sm-fill text-sm-center nav-item nav-link" id="nav-availability-tab" data-toggle="tab" href="#nav-availability" role="tab" aria-controls="nav-availability" aria-selected="false">{{__('rw_products.availability')}}</a>
-                                <a class="flex-sm-fill text-sm-center nav-item nav-link" id="nav-pictures-tab" data-toggle="tab" href="#nav-pictures" role="tab" aria-controls="nav-pictures" aria-selected="false">{{__('rw_products.pictures')}}</a>
+                            <nav class="nav nav-tabs" id="productTab" role="tablist">
+                                <a class="nav-item nav-link active"  style="padding:5px;" id="nav-details-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="true">
+                                    <span class = "rw-icons"> 
+                                        <i class="material-icons" style="text-align:center;">info</i>
+                                        <span class="rw-desktop">{{__('rw_products.details')}}</span>
+                                    </span>
+                                </a>
+                                &nbsp
+                                <a class=" nav-item nav-link " style="padding:5px;" id="nav-prices-tab" data-toggle="tab" href="#nav-prices" role="tab" aria-controls="nav-prices" aria-selected="false"> 
+                                    <span class = "rw-icons">     
+                                        <i class="material-icons">euro_symbol</i>
+                                        <span class="rw-desktop">{{__('rw_products.prices')}}</span>
+                                    </span>
+                                </a>
+                                &nbsp
+                                <a class=" nav-item nav-link" style="padding:5px;" id="nav-availability-tab" data-toggle="tab" href="#nav-availability" role="tab" aria-controls="nav-availability" aria-selected="false"> 
+                                    <span class = "rw-icons">     
+                                        <i class="material-icons">access_time</i>
+                                        <span class="rw-desktop">{{__('rw_products.availability')}}</span>
+                                    </span>
+                                </a>
+                                &nbsp
+                                <a class=" nav-item nav-link" style="padding:5px;" id="nav-pictures-tab" data-toggle="tab" href="#nav-pictures" role="tab" aria-controls="nav-pictures" aria-selected="false"> 
+                                    <span class = "rw-icons">      
+                                        <i class="material-icons">photo_camera</i>
+                                        <span class="rw-desktop">{{__('rw_products.pictures')}}</span>
+                                    </span>
+                                </a>
                             </nav>
                         </div> 
                         <div class="card-body rw-scrolly">

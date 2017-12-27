@@ -7,7 +7,7 @@
         <div class="row justify-content-md-centerrow justify-content-md-center">
             <div class="col-lg-12">
                 <div class="card card-primary">
-                    <div class="card-header text-white bg-primary rw-title" style="padding-top:7px; padding-bottom:0px;">
+                    <div class="card-header text-white bg-primary rw-title" style="padding-top:6px; padding-bottom:0px;">
                         <h5>
                             <div class="row h-100 justify-content-center align-items-center"> 
                                 <i class="material-icons" style="font-size: 40px">contact_mail</i>  
@@ -17,7 +17,7 @@
                         </h5>
                     </div>
         <!-- BUTTON BAR  -->
-                    <div class="card-header rw-buttonbar">  
+                    <div class="card-header rw-buttonbar" style="padding:5px;">  
                         <b>                      
                             <a class="rw-icons rw-grey" href="/my-messages/inbox">
                                 <i class="material-icons">arrow_back</i> 

@@ -203,6 +203,12 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:fir
 div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:last-child {
   padding-right: 0;
 }
+@media only screen and (max-width: 1026px) {
+  .rw-desktop {
+    display: none;
+  }
+}
+
 body {
   padding-top: 80px;
 }
@@ -321,7 +327,7 @@ a:active {
 
 .rw-scrolly {
   overflow-y: auto;
-  max-height: 30em;
+  max-height: 35em;
 }
 
 .rw-prd-text {
