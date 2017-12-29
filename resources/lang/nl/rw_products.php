@@ -68,4 +68,5 @@ return [
     'warranty_title' => 'Waarborg regeling',
     'delivery_title' => 'Thuislevering ?',
     'profile_title' => 'Info over de verhuurder',
+    'rentit' => 'HUUR NU !'
 ];

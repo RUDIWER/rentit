@@ -23,5 +23,10 @@ return [
     'alert' => 'OPGELET !!!',
     'alert_message' => 'U kan geen boodschap naar U zelf sturen !!!',
     'delete' => 'Verwijder',
-    'del-mail' => 'Bent U zeker dat U dit bericht definitief wenst te verwijderen ?'
+    'del-mail' => 'Bent U zeker dat U dit bericht definitief wenst te verwijderen ?',
+    'conversation' => 'Volledig gesprek weergeven',
+    'conversation_title' => 'Volledig Gesprek',
+    'from_me' => 'van mij',
+    'from' => 'Van',
+    'to_me' => 'mij'
 ];

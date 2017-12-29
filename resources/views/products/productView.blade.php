@@ -32,8 +32,8 @@
                                 <h5 class="rw-orange">{{ $product->title }}</h5> 
                             </div> 
                             <div class="col-md-6 pull-right rw-header">
-                                <button type="button" class="btn btn-large btn-outline-success pull-right">
-                                    <b class="rw-icons"><i class="material-icons">thumb_up</i>&nbsp Huur NU !</b>
+                                <button id="rentit" type="button" class="btn btn-large btn-outline-success pull-right">
+                                    <b class="rw-icons"><i class="material-icons">thumb_up</i>&nbsp  {{__('rw_products.rentit')}}</b>
                                 </button>
                             </div>
                         </div>
@@ -171,12 +171,17 @@
 
             //http://unitegallery.net
 			var api; 
-			jQuery(document).ready(function(){
+			$(document).ready(function(){
+            // On press Rentit buttonpweb
+            $("#rentit").on('click', function() {
+                window.location.href = "{{URL::to('rentit/step-1/' . $product->id )}}"
+            });
+
+            // Picture Gallery    
 				api = jQuery("#gallery").unitegallery({
                     gallery_theme:"compact",
 
                 }); 
-
                 api.resize(800);
 			}); 
 		

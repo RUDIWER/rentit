@@ -71,9 +71,9 @@
                                             <td style="display:none;">{{ $message->chain_id }}</td>
                                             <td style="display:none;">{{ $message->id }}</td>
                                             @if($message->sender_id == $user->id)
-                                                <td>Van mij -> {{ $message->receiver->nickname }}</td>
+                                                <td> {{__('rw_messaging.from_me')}} -> {{ $message->receiver->nickname }}</td>
                                             @else
-                                            <td>Van {{ $message->sender->nickname }} -> mij</td>
+                                            <td> {{__('rw_messaging.from')}} {{ $message->sender->nickname }} ->  {{__('rw_messaging.to_me')}}</td>
                                             @endif
                                             <td>{{ $message->title }}</td>
                                             <td>{{ $message->updated_at->diffForHumans()}}</td>

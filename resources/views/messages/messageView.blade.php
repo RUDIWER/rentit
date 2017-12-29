@@ -46,10 +46,24 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">                              
                                 <label for="message" class="col-form-label text-primary">{{__('rw_messaging.subject_label')}}</label>
-                                <textarea type="text" class="form-control rw-input" rows="10" id="message" name="message" readonly style="padding:1em;">{{ $message->message }}</textarea> 
+                                @if($message->sender_id != Auth::user()->id) 
+                                    <div class="alert alert-info alert-block">
+                                @else                         
+                                    <div class="alert alert-success alert-block">
+                                @endif
+                                {{ $message->message }}
+                                </div>
                             </div>
                         </div> 
-                    </div> 
+                    </div>
+                    <div class="card-footer"> 
+                        <b> 
+                            <a class="rw-icons rw-grey pull-right" href="/my-messages/conversation/{{$message->chain_id}}">
+                                <i class="material-icons">forum</i> 
+                                {{__('rw_messaging.conversation')}}
+                            </a>
+                        </b>
+                    </div>
                 </div>
             </div>
         </div>   

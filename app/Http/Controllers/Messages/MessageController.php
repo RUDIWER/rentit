@@ -125,6 +125,16 @@ class MessageController extends Controller
         return view('messages.messageList', compact('user', 'profile', 'messages', 'sentBox'));
     }
 
+    public function conversationList($chainId)
+    {
+        $userId = Auth::id();
+        $user = User::find($userId);
+        $profile = $user->profile;
+        $messages = Message::where('owner_id', '=', "$userId")->where('chain_id', '=', "$chainId")->orderBy('id', 'ASC')->get();
+
+        return view('messages.conversationList', compact('user', 'profile', 'messages'));
+    }
+
     public function view($messageId, $sentBox)
     {
         $new = 0;

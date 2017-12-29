@@ -69,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/my-messages/inbox', 'Messages\MessageController@inboxList')->name('my-messages.inboxList');
     Route::get('/my-messages/sentbox', 'Messages\MessageController@sentBoxList')->name('my-messages.sentBoxList');
     Route::get('/my-messages/details/{id}/{sentBox}', 'Messages\MessageController@view')->name('my-messages.view');
+    Route::get('/my-messages/conversation/{chainId}', 'Messages\MessageController@conversationList')->name('my-messages.conversationList');
     Route::get('/message/create/{receiverId}/{productId}/{chainId}', 'Messages\MessageController@create')->name('message.create');
     Route::post('message/send/{id}/{chainId}', 'Messages\MessageController@send')->name('message.send');
     Route::get('message/delete/{id}/{sentBox}', 'Messages\MessageController@delete')->name('message.delete');
@@ -79,6 +80,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/my-products/edit/{id}', 'Products\ProductController@edit')->name('my-products.edit');
     Route::get('/my-products/delete/{id}', 'Products\ProductController@delete')->name('my-products.delete');
     Route::post('/my-products/save/{id}', 'Products\ProductController@save')->name('my-products.save');
+
+    //RENTIT Routes
+    Route::get('/rentit/step-1/{idProduct}', 'Rentit\RentitController@step1')->name('rentit.step1');
 
     // AJAX ROUTES
     //PRODUCT AJAX Routes
