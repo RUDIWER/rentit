@@ -31,9 +31,9 @@ class MessageController extends Controller
             $title = $lastMessage->title;
         }
         if ($receiver->id == $userId) {  // No messages to your own !
-            session()->flash('message.level', 'danger');
-            session()->flash('message.content', __('rw_messaging.alert_message'));
-            return view('layouts.alert', compact('profile'));
+            return back();
+            ;
+            //   return ->with('danger', __('rw_messaging.alert_message'));
         } elseif ($userId) {
             return view('messages.messageForm', compact('new', 'sender', 'senderProfile', 'receiver', 'profile', 'title', 'chain'));
         } else {
@@ -99,8 +99,8 @@ class MessageController extends Controller
         $messageReceiver->save();
         // Notification
         $receiver->notify(new ReceivedMessage());
-        session()->flash('msg', 'success');
-        return redirect()->back()->withInput();
+        //   session()->flash('msg', 'success');
+        return redirect()->back()->withInput()->with('success', __('rw_profile.send'));
     }
 
     public function inboxList()
@@ -125,7 +125,7 @@ class MessageController extends Controller
         return view('messages.messageList', compact('user', 'profile', 'messages', 'sentBox'));
     }
 
-    public function view($messageId)
+    public function view($messageId, $sentBox)
     {
         $new = 0;
         $userId = Auth::id();
@@ -141,19 +141,24 @@ class MessageController extends Controller
             $message->save();
         }
         if ($userId) {
-            return view('messages.messageView', compact('new', 'message', 'profile', 'userId'));
+            return view('messages.messageView', compact('new', 'sentBox', 'message', 'profile', 'userId'));
         } else {
             return view('auth.login');
         }
     }
 
-    public function delete($messageId)
+    public function delete($messageId, $sentBox)
     {
         $userId = Auth::id();
         $user = User::find($userId);
         $profile = $user->profile;
         $message = Message::find($messageId);
         $message->delete();
+        if ($sentBox == 0) {
+            $messages = Message::where('owner_id', '=', "$userId")->where('receiver_id', '=', "$userId")->orderBy('id', 'DESC')->get();
+        } else {
+            $messages = Message::where('owner_id', '=', "$userId")->where('sender_id', '=', "$userId")->orderBy('id', 'DESC')->get();
+        }
 
         // Nog verder uitwerken (RW)
 

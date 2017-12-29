@@ -23,4 +23,5 @@ return [
     'day' => 'dag',
     'week' => 'week',
     'month' => 'maand',
+    'message-to-me' => 'U kan geen bericht naar u zelf sturen !'
 ];

@@ -11,7 +11,6 @@
             <form class="form" role="form" name="productForm" id="productForm" method="POST" enctype="multipart/form-data"  action="/my-products/save/{{ $product->id }}">
         @endif
         {{ csrf_field() }}
-        <input type="hidden" id="productId" name="product_id" value="{{ $product->id }}"> 
           
             <div class="row justify-content-md-centerrow justify-content-md-center">  
                 <div class="col-lg-12">
@@ -41,7 +40,7 @@
                                     {{__('rw_login.save')}}
                                 </a> 
                                 @if(!$isNew == 1)
-                                    <a id="delete" class="rw-icons rw-red pull-right" href="#" data-toggle="modal" data-target="#exampleModal" >
+                                    <a id="delete" class="rw-icons rw-red pull-right" href="#" data-toggle="modal" data-target="#rw-alert-modal" >
                                         <i class="material-icons">delete_forever</i>  
                                         {{__('rw_login.delete')}}&nbsp&nbsp&nbsp&nbsp&nbsp
                                     </a>
@@ -81,21 +80,7 @@
                             </nav>
                         </div> 
                         <div class="card-body rw-scrolly">
-                             @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <h5>{{__('rw_profile.errors')}}</h5>
-                                    <br>
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @elseif (\Session::has('msg'))
-                                <div id="profile-success" class="alert alert-success">    
-                                    <h5>{{__('rw_profile.success')}}</h5>   
-                                </div>
-                            @endif
+                            @include('/layouts/flash-messages')
                             <div class="row justify-content-md-center">
                                 <div class="col-lg-12">                  
                                 <div class="tab-content" id="nav-tabContent">
@@ -426,31 +411,11 @@
         </form>
     </div>
 
-<!-- MODAL FOR DELETE CONFIRMATION -->
+    <!-- Call to alertModal -->
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">{{__('rw_products.attention')}}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            {{__('rw_products.del-product')}}
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal"> {{__('rw_products.no')}}</button>
-            <button id="modal-save" name="modal-save" type="button" class="btn btn-primary"> {{__('rw_products.yes')}}</button>
-        </div>
-        </div>
-    </div>
-    </div>
-<!-- END MODAL -->
-
-
+    @component('/layouts/alertModal')
+        {{__('rw_products.del-product')}}
+    @endcomponent
 
 @endsection
 @section('javascript')
@@ -484,8 +449,6 @@
             var group = $('#group option:selected').val();
             var category = $('#category option:selected').val();
             var subCategory = $('#sub_category option:selected').val();
-            var productId = $('#productId option:selected').val();
-
 
             if (pors !== "empty") {
                 $("#group").prop('disabled', false);

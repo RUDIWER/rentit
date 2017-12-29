@@ -24,10 +24,11 @@
                             </a>
                         </div>
                             </b>
-                    </div>              
+                    </div>  
+                    @include('/layouts/flash-messages')            
                     <div class="card-body">                      
                         @foreach($products as $product)                                
-                            <div id="{{$product->id}}" class="card text-primary mb-3 rw-card-hover product-form"> 
+                            <div class="card text-primary mb-3 rw-card-hover"> 
                                 <div class="card-header bg-light rw-header"> 
                                     <div class="col-md-8 pull-left  rw-header ">  
                                         <a href="{{ route('productView',['id'=> $product->id])}}">
@@ -56,7 +57,15 @@
                                     </div>
                                     <div class="col-md-4 pull-right rw-header">
                                         <img src="{{ $product->user->profile->picture }}" width="70px" height="70px" class="rw-icons rounded-circle pull-right"/>
-                                        <a class="card-text" href="{{ route('message.create',['receiverId'=> $product->user->id, 'productId'=> $product->id, 'chain' => 0])}}"><b><i class="material-icons rw-icons">person</i> {{ $product->user->nickname }}</b><br>
+                            <!--            <a class="card-text" href="{{ route('message.create',['receiverId'=> $product->user->id, 'productId'=> $product->id, 'chain' => 0])}}"><b><i class="material-icons rw-icons">person</i> {{ $product->user->nickname }}</b><br>  -->
+                                        <a class="card-text seller" href='#'>
+                                            <b><i class="material-icons rw-icons">person</i> {{ $product->user->nickname }}</b><br>
+                                            <input type="hidden" id="seller-id" value="{{ $product->user->id }}"/> 
+                                            @if (!Auth::guest())
+                                                <input type="hidden" id="user-id" name="user-id" value="{{ Auth::user()->id }}"/> 
+                                            @endif
+                                            <input type="hidden" id="product-id" name="user-id" value="{{ $product->id }}"/> 
+                                        </a>
                                         <a class="card-text"><i class="material-icons rw-icons">place</i> {{ $product->user->profile->addr1_postcode }} - {{ $product->user->profile->addr1_city }} ({{ $product->user->profile->addr1_country }})</a><br>  
                                          @if($product->user->profile->company == 0)
                                             <a class="card-text"><i class="material-icons rw-icons">info</i> {{__('rw_results.particulier')}} </a>
@@ -65,7 +74,7 @@
                                         @endif          
                                     </div>
                                 </div> 
-                                <div class="row">
+                                <div id="{{$product->id}}" class="row  product-form">
                                     <div class="col-md-3">
                                         <img class="card-img-left rw-img" src="{{$product->picture_1}}" alt="Product image">
                                     </div>
@@ -151,20 +160,53 @@
             </div>
         </div>
     </div>
-</div>
-</div> <!-- (RW) end #app vue instance !!!! -->
+    <!-- Call to alertModal -->
+
+    @component('/layouts/messageModal')
+        {{__('rw_results.message-to-me')}}
+    @endcomponent
 
 @endsection
 @section('javascript')
 <script type="text/javascript" charset="utf-8">
 
 $(document).ready(function() {
-
-    // Goto view when click on card
     $( ".product-form" ).click(function() {
-       window.location.href = "/product/" + $(this).attr('id');   
+        console.log('.product-form grklikt');
+        window.location.href = "/product/" + $(this).attr('id');   
     });
 
+
+    $( ".seller" ).click(function(){ 
+        console.log('.seller geklikt');
+
+        var sellerId =  $(this).children('#seller-id').val();
+        var userId =  $(this).children('#user-id').val();
+        var productId =  $(this).children('#product-id').val();
+        console.log(userId);
+
+        if(typeof userId === 'undefined'){
+            window.location.href = "/unauthorised"; ;
+            console.log('NA PATHHHHHHHHHHH') 
+        }
+
+        if(sellerId == userId ){
+            $('#rw-message-modal').modal('show'); 
+
+        }
+
+
+        else{
+            window.location.href = "/message/create/" + sellerId + "/" + productId + "/0";  
+        }
+    });
+
+
+
+    
+
+
+   
 
 
 

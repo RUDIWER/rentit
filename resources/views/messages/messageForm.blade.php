@@ -19,7 +19,7 @@
         <!-- BUTTON BAR  -->
                     <div class="card-header rw-buttonbar" style="padding:5px;">  
                         <b>                      
-                            <a class="rw-icons rw-grey" href="/my-messages/inbox">
+                            <a class="rw-icons rw-grey" href="javascript:window.history.go(-2);">
                                 <i class="material-icons">arrow_back</i> 
                                 {{__('rw_products.back')}}
                             </a>
@@ -31,24 +31,10 @@
                     </div>        
                     <br>
                     <div class="card-body"> 
+                        @include('/layouts/flash-messages')
                         @if($chain)
                             <h6 class="rw-orange">{{__('rw_messaging.reply_message')}} {{ $receiver->nickname }}  </h6>
-                        @endif
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <h5>{{__('rw_profile.errors')}}</h5>
-                                <br>
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @elseif (\Session::has('msg'))
-                            <div id="profile-success" class="alert alert-success">    
-                                <h5>{{__('rw_profile.send')}}</h5>   
-                            </div>
-                        @endif  
+                        @endif 
                         <div class="form-row">
                             <div class="form-group col-md-12">                              
                                 <label for="title" class="col-form-label text-primary"  style="padding-bottom:1em;">{{__('rw_messaging.title_label')}}</label><br>

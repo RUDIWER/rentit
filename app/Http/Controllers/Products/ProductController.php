@@ -162,6 +162,8 @@ class ProductController extends Controller
         $product->save();
 
         session()->flash('msg', 'success');
+        session()->flash('message.content', __('rw_messaging.alert_message'));
+
         return redirect()->back()->withInput();
     }
 
@@ -172,7 +174,7 @@ class ProductController extends Controller
         $profile = $user->profile;
         $product = product::find($idProduct);
         $product->delete();
-        $products = Product::al();
+        $products = Product::all();
 
         return view('products.productList', compact('products', 'userId', 'user', 'profile'));
     }

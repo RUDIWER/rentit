@@ -22,5 +22,6 @@ return [
     'zero_records' => 'Er zijn momenteel geen berichten !',
     'alert' => 'OPGELET !!!',
     'alert_message' => 'U kan geen boodschap naar U zelf sturen !!!',
-    'delete' => 'Verwijder'
+    'delete' => 'Verwijder',
+    'del-mail' => 'Bent U zeker dat U dit bericht definitief wenst te verwijderen ?'
 ];

@@ -59,11 +59,6 @@ Route::middleware(['auth'])->group(function () {
     // Home logged in User
     Route::get('/home', 'HomeController@index');
 
-    // MESSAGE routes
-    Route::get('/message/create/{receiverId}/{productId}/{chainId}', 'Messages\MessageController@create')->name('message.create');
-    Route::post('/message/send/{id}/{chainId}', 'Messages\MessageController@send')->name('message.send');
-    Route::get('/message/delete/{id}', 'Messages\MessageController@delete')->name('message.delete');
-
     // Route to profile from logged in user (slug only visible auth:id used to get profile)
     Route::get('/my-profile', 'Profile\ProfileController@index')->name('profile');
 
@@ -73,7 +68,10 @@ Route::middleware(['auth'])->group(function () {
     //Routes to messages from logged in user
     Route::get('/my-messages/inbox', 'Messages\MessageController@inboxList')->name('my-messages.inboxList');
     Route::get('/my-messages/sentbox', 'Messages\MessageController@sentBoxList')->name('my-messages.sentBoxList');
-    Route::get('/my-messages/details/{id}', 'Messages\MessageController@view')->name('my-messages.view');
+    Route::get('/my-messages/details/{id}/{sentBox}', 'Messages\MessageController@view')->name('my-messages.view');
+    Route::get('/message/create/{receiverId}/{productId}/{chainId}', 'Messages\MessageController@create')->name('message.create');
+    Route::post('message/send/{id}/{chainId}', 'Messages\MessageController@send')->name('message.send');
+    Route::get('message/delete/{id}/{sentBox}', 'Messages\MessageController@delete')->name('message.delete');
 
     // PRODUCT Routes to products from logged in user (slug only visible auth:id used to get profile)
     Route::get('/my-products', 'Products\ProductController@list')->name('my-products.list');

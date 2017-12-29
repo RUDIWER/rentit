@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+<input type="hidden" id="sentBox" name="sendBox" value="{{ $sentBox }}"/> 
+
 <div class="container h-100">
     <div class="row justify-content-md-centerrow justify-content-md-center">
         <div class="col-lg-12">
@@ -26,7 +28,7 @@
                             <i class="material-icons">arrow_back</i> 
                             {{__('rw_profile.back')}}
                         </a>
-                        @if( $sentBox == 1)
+                        @if( $sentBox == 1)  <!--- if send items showed button to switch to inbox -->
                             <a class="rw-icons rw-grey pull-right" href="/my-messages/inbox">
                                 <i class="material-icons">call_received</i>
                                 {{__('rw_messaging.received_mail')}}
@@ -91,10 +93,8 @@
 @section('javascript')
 <script defer src="/fonts/vendor/font-awesome-5/svg-with-js/js/fontawesome-all.min.js"></script>
 <script type="text/javascript" charset="utf-8">
-    console.log('Test');
-
     $(document).ready(function() {
-
+        var sentBox = $('#sentBox').val();        
         var messagesTable = $('#messagesTable').DataTable( {
                                 "info":    false,
                                 "scrollY":        "35em",
@@ -112,8 +112,8 @@
         $('#messagesTable').on('click', 'tr', function () {
             var row = messagesTable.row(this).data();
             var messageId = row[2];
-            console.log(messageId);
-            var path = "./details/" + messageId;
+            console.log(sentBox);
+            var path = "./details/" + messageId + "/" + sentBox;
             window.location.href = path;
         });
 
