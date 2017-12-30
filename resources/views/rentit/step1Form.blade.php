@@ -53,7 +53,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-7">
-                                    <form class="form" role="form" name="step1Form" id="step1Form" method="POST" enctype="multipart/form-data"  action="/rentit/step-1/save">
+                                    <form class="form" role="form" name="step1Form" id="step1Form" method="POST" enctype="multipart/form-data"  action="/rentit/step-1/save">        
                                         <div class="form-row">
                                             <div class="form-group col-md-5">                              
                                                 <label for="start_date" class="col-form-label text-primary">{{__('rw_rentit.start_date')}}</label>
@@ -65,49 +65,51 @@
                                             </div>
                                         </div>
                                         <div class="form-row">  
-                                            <div class="form-group col-md-5">                              
-                                                <label for="end_date" class="col-form-label text-primary">{{__('rw_rentit.end_date')}}</label>
-                                                <input type="date" class="form-control rw-input" id="end_date" name="end_date" value="{{ old('end_date') }}"/> 
-                                            </div>
-                                            <div class="form-group col-md-4">                              
-                                                <label for="end_time" class="col-form-label text-primary">{{__('rw_rentit.end_time')}}</label>
-                                                <input type="time" class="form-control rw-input" id="end_time" name="end_time" value="{{ old('end_time') }}"/> 
+                                            <div class="form-group col-md-4 hours-group">                              
+                                                <label for="hours" class="col-form-label text-primary">{{__('rw_rentit.quant_hours')}}</label>
+                                                <input type="number" min="0" max="24" class="form-control rw-input" id="hours" name="hours" value="{{ old('end_date') }}"/> 
                                             </div>
                                         </div>
+                                        <div class="form-row"> 
+                                            <div class="form-group col-md-4 days-group">                              
+                                                <label for="days" class="col-form-label text-primary">{{__('rw_rentit.quant_days')}}</label>
+                                                <input type="number" min="0" max="7" class="form-control rw-input" id="days" name="days" value="{{ old('end_date') }}"/> 
+                                            </div>
+                                        </div>
+                                        <div class="form-row"> 
+                                            <div class="form-group col-md-4 weeks-group">                              
+                                                <label for="weeks" class="col-form-label text-primary">{{__('rw_rentit.quant_weeks')}}</label>
+                                                <input type="number" min="0" max="4" class="form-control rw-input" id="weeks" name="weeks" value="{{ old('end_date') }}"/> 
+                                            </div>
+                                        </div>
+                                        <div class="form-row"> 
+                                            <div class="form-group col-md-4 months-group">                              
+                                                <label for="months" class="col-form-label text-primary">{{__('rw_rentit.quant_months')}}</label>
+                                                <input type="number" min="0" max="12" class="form-control rw-input" id="months" name="months" value="{{ old('end_date') }}"/> 
+                                            </div>
+                                        </div>            
                                         <div class="form-row">  
                                             <div class="form-group col-md-12">                              
                                                 <label for="rent_info" class="col-form-label text-primary">{{__('rw_rentit.info')}}</label>
                                                 <textarea type="text" class="form-control rw-input" rows="5" id="rent_info" name="rent_info">{{ old('rent_info') }}</textarea> 
                                             </div>
-                                        </div>
+                                        </div> 
                                     </form>
-                                   
- 
                                 </div>
-                           
                                 <div class="col-md-5">
-                    
+                                    <b><p id="message">Vul het formulier in </p></b>
+                                    Prijs informatie<br>
+                                    Totale huurprijs (ex. waarborg):<br>
+                                    Bestaande uit :
+                                    Voorschot (te betalen via deze site) :<br>
+                                    Saldo (Te betalen aan de verhuurder) :<br>
+                                    
 
-                                    <button id="calcButton" type="button" class="btn btn-danger ">
-                                        <div class="row h-100 justify-content-center align-items-center"> 
-                                            <i class="material-icons">monetization_on</i></i>  
-                                            Bereken Prijs
-                                        </div>
-                                    </button>
-
-                                <b><p id="message">Vul het formulier in </p></b>
-                                Prijs informatie<br>
-                                Totale huurprijs (ex. waarborg):<br>
-                                Bestaande uit :
-                                Voorschot (te betalen via deze site) :<br>
-                                Saldo (Te betalen aan de verhuurder) :<br>
-                                
-
-                                Waarborg bedrag (te betalen aan de verhuurder) : <br>
+                                    Waarborg bedrag (te betalen aan de verhuurder) : <br>
 
 
 
-                                </b>
+                                    </b>
 
                                 
                                 </div>

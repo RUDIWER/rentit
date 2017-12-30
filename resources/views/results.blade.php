@@ -109,38 +109,50 @@
                                     </div>
                                     <div class="col-md-4  rw-prd-price">  
                                         <table class="pull-right">
-                                            <tr>
-                                                <td>
-                                                    <a class="rw-p-price"><h6 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_hour }} </b></a>
-                                                </td>
-                                                <td>
-                                                    <h5><sup>{{__('rw_results.hour')}}</sup></h6>     
-                                                </td>  
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a class="rw-p-price"><h6 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_day }}</b></a></h5>
-                                                </td>
-                                                <td>
-                                                    <h5><sup>{{__('rw_results.day')}}</sup></h6> 
-                                                </td>  
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <a class="rw-p-price"><h6 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_week }}</b></a></h5>
-                                                </td>
-                                                <td>
-                                                    <h5><sup>{{__('rw_results.week')}}</sup></h6> 
-                                                </td>  
-                                            </tr>
-                                             <tr>
-                                                <td>
-                                                    <a class="rw-p-price"><h6 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_month }}</b></a></h5>
-                                                </td>
-                                                <td>
-                                                    <h5><sup>{{__('rw_results.month')}}</sup></h6> 
-                                                </td>  
-                                            </tr>
+                                            @if(!$product->price_hour && !$product->price_day && !$product->price_week && !$product->price_month)
+                                                <a class="rw-p-price"><h5 class="rw-txt-right"><i class="material-icons rw-icons  rw-green"  style="font-size: 40px" >favorite</i><b>{{__('rw_results.for_free')}}</b></a></h5>
+                                                <p class="rw-p-price"><div class="rw-txt-right">{{__('rw_results.handle_costs')}}</p></div>
+                                            @endif
+                                            @if($product->price_hour > 0)
+                                                <tr>
+                                                    <td>
+                                                        <a class="rw-p-price"><h6 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_hour }} </b></a>
+                                                    </td>
+                                                    <td>
+                                                        <h5><sup>{{__('rw_results.hour')}}</sup></h6>     
+                                                    </td>  
+                                                </tr>
+                                            @endif
+                                            @if($product->price_day > 0)
+                                                <tr>
+                                                    <td>
+                                                        <a class="rw-p-price"><h6 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_day }}</b></a></h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5><sup>{{__('rw_results.day')}}</sup></h6> 
+                                                    </td>  
+                                                </tr>
+                                            @endif
+                                            @if($product->price_week > 0)
+                                                <tr>
+                                                    <td>
+                                                        <a class="rw-p-price"><h6 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_week }}</b></a></h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5><sup>{{__('rw_results.week')}}</sup></h6> 
+                                                    </td>  
+                                                </tr>
+                                            @endif
+                                            @if($product->price_week > 0)
+                                                <tr>
+                                                    <td>
+                                                        <a class="rw-p-price"><h6 class="rw-txt-right"><i class="material-icons rw-icons">euro_symbol</i><b>{{ $product->price_month }}</b></a></h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5><sup>{{__('rw_results.month')}}</sup></h6> 
+                                                    </td>  
+                                                </tr>
+                                            @endif
                                         </table> 
 
                                         <!--

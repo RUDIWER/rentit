@@ -215,9 +215,20 @@
                                         </div>
                             <!-- PRICES TAB -->
                                         <div class="tab-pane fade show" id="nav-prices" role="tabpanel" aria-labelledby="nav-prices-tab">
-                                            <div class="card-header bg-light border-light">  
-                                                <h5> {{__('rw_products.price_info')}}</h5>
+                                            <div class="card-header bg-light border-light"> 
+                                                <div class="row">
+                                                    <h5> {{__('rw_products.price_info')}}</h5>
+                                                </div>
                                             </div>
+                                            <br>   
+                                            <small class="rw-red">
+                                                <div class="row align-items-center">  
+                                                    <i class="material-icons" style="font-size: 40px">warning</i> 
+                                                    &nbsp{{__('rw_products.price_warning')}}<br>
+                                                    &nbsp{{__('rw_products.price_warning2')}}<br>
+                                                    &nbsp{{__('rw_products.price_warning3')}}  
+                                                </div>
+                                            </small> 
                                             <br>
                                             <div class="form-row">
                                                 <div class="form-group col-md-3">                              

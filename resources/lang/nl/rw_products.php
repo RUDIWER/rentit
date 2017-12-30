@@ -68,5 +68,8 @@ return [
     'warranty_title' => 'Waarborg regeling',
     'delivery_title' => 'Thuislevering ?',
     'profile_title' => 'Info over de verhuurder',
-    'rentit' => 'HUUR NU !'
+    'rentit' => 'HUUR NU !',
+    'price_warning' => 'Indien U een bepaalde periode niet wenst te verhuren laat U het veld leeg !',
+    'price_warning2' => 'bv : U verhuurt niet per uur prijs / uur -> leeglaten.',
+    'price_warning3' => 'Indien U nergens een prijs vermeld leent U het product GRATIS uit !',
 ];
