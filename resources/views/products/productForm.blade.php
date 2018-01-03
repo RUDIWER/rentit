@@ -52,28 +52,28 @@
                             <nav class="nav nav-tabs" id="productTab" role="tablist">
                                 <a class="nav-item nav-link active"  style="padding:5px;" id="nav-details-tab" data-toggle="tab" href="#nav-details" role="tab" aria-controls="nav-details" aria-selected="true">
                                     <span class = "rw-icons"> 
-                                        <i class="material-icons" style="text-align:center;">info</i>
+                                        <i class="material-icons" style="text-align:center;  font-size: 35px">info</i>
                                         <span class="rw-desktop">{{__('rw_products.details')}}</span>
                                     </span>
                                 </a>
                                 &nbsp
                                 <a class=" nav-item nav-link " style="padding:5px;" id="nav-prices-tab" data-toggle="tab" href="#nav-prices" role="tab" aria-controls="nav-prices" aria-selected="false"> 
                                     <span class = "rw-icons">     
-                                        <i class="material-icons">euro_symbol</i>
+                                        <i class="material-icons" style="text-align:center;  font-size: 35px">euro_symbol</i>
                                         <span class="rw-desktop">{{__('rw_products.prices')}}</span>
                                     </span>
                                 </a>
                                 &nbsp
                                 <a class=" nav-item nav-link" style="padding:5px;" id="nav-availability-tab" data-toggle="tab" href="#nav-availability" role="tab" aria-controls="nav-availability" aria-selected="false"> 
                                     <span class = "rw-icons">     
-                                        <i class="material-icons">access_time</i>
+                                        <i class="material-icons" style="text-align:center;  font-size: 35px">access_time</i>
                                         <span class="rw-desktop">{{__('rw_products.availability')}}</span>
                                     </span>
                                 </a>
                                 &nbsp
                                 <a class=" nav-item nav-link" style="padding:5px;" id="nav-pictures-tab" data-toggle="tab" href="#nav-pictures" role="tab" aria-controls="nav-pictures" aria-selected="false"> 
                                     <span class = "rw-icons">      
-                                        <i class="material-icons">photo_camera</i>
+                                        <i class="material-icons" style="text-align:center;  font-size: 35px">photo_camera</i>
                                         <span class="rw-desktop">{{__('rw_products.pictures')}}</span>
                                     </span>
                                 </a>
@@ -89,7 +89,27 @@
                                             <div class="card-header bg-light border-light">  
                                                 <h5> {{__('rw_products.info')}}</h5>
                                             </div>
-                                            <br>           
+                                            <br>  
+                                            <div class="form-row">
+                                                <div class="form-group col-md-5">
+                                                    <label for="pors" class="text-primary">{{__('rw_products.loanorrent')}}</label>
+                                                    <div class="input-group rw-icons">
+                                                        <select class="form-control rw-input" id="loan_or_rent" name="loan_or_rent">
+                                                            <option value="empty" selected disabled>{{__('rw_products.select')}}</option>
+                                                            @if($product->loan_or_rent == 0)
+                                                                <option value="0" selected="selected">{{__('rw_products.rent')}}</option>
+                                                                <option value="1">{{__('rw_products.loan')}}</option>
+                                                            @elseif($product->loan_or_rent == 1)
+                                                                <option value="1" selected="selected">{{__('rw_products.loan')}}</option>
+                                                                <option value="0">{{__('rw_products.rent')}}</option>
+                                                            @endif
+                                                        </select> 
+                                                        <i class="material-icons">arrow_drop_down_circle</i>
+                                                    </div>
+                                                </div>
+                                                <span class= "rw-red" id="loan_text"><br></span>
+                                                <br>
+                                            </div>         
                                             <div class="form-row">
                                                 <div class="form-group col-md-5">
                                                     <label for="pors" class="text-primary">{{__('rw_products.pors')}}</label>
@@ -220,34 +240,37 @@
                                                     <h5> {{__('rw_products.price_info')}}</h5>
                                                 </div>
                                             </div>
-                                            <br>   
-                                            <small class="rw-red">
-                                                <div class="row align-items-center">  
-                                                    <i class="material-icons" style="font-size: 40px">warning</i> 
-                                                    &nbsp{{__('rw_products.price_warning')}}<br>
-                                                    &nbsp{{__('rw_products.price_warning2')}}<br>
-                                                    &nbsp{{__('rw_products.price_warning3')}}  
-                                                </div>
-                                            </small> 
-                                            <br>
+                                            <br>  
+                                            <div id="price-group1">
+                                                <small class="rw-red">
+                                                    <div class="row align-items-center">  
+                                                        <i class="material-icons" style="font-size: 40px">warning</i> 
+                                                        &nbsp{{__('rw_products.price_warning')}}<br>
+                                                        &nbsp{{__('rw_products.price_warning2')}}<br>
+                                                        &nbsp{{__('rw_products.price_warning3')}}  
+                                                    </div>
+                                                </small> 
+                                                <br>
+                                            </div>            
                                             <div class="form-row">
                                                 <div class="form-group col-md-3">                              
                                                     <label for="price_hour" class="col-form-label text-primary">{{__('rw_products.price_hour')}}</label>
-                                                    <input type="num" class="form-control rw-input" id="price_hour" name="price_hour" value="{{ old('price_hour', $product->price_hour) }}"/> 
+                                                    <input type="num" class="form-control rw-input price-group" id="price_hour" name="price_hour" value="{{ old('price_hour', $product->price_hour) }}"/> 
                                                 </div>
                                                 <div class="form-group col-md-3">                              
                                                     <label for="price_day" class="col-form-label text-primary">{{__('rw_products.price_day')}}</label>
-                                                    <input type="num" class="form-control rw-input" id="price_day" name="price_day" value="{{ old('price_day', $product->price_day) }}" /> 
+                                                    <input type="num" class="form-control rw-input price-group" id="price_day" name="price_day" value="{{ old('price_day', $product->price_day) }}" /> 
                                                 </div>
                                                 <div class="form-group col-md-3">                              
                                                     <label for="price_week" class="col-form-label text-primary">{{__('rw_products.price_week')}}</label>
-                                                    <input type="num" class="form-control rw-input" id="price_week" name="price_week" value="{{ old('price_week', $product->price_week) }}"/> 
+                                                    <input type="num" class="form-control rw-input price-group" id="price_week" name="price_week" value="{{ old('price_week', $product->price_week) }}"/> 
                                                 </div>
                                                 <div class="form-group col-md-3">                              
                                                     <label for="price_month" class="col-form-label text-primary">{{__('rw_products.price_month')}}</label>
-                                                    <input type="num" class="form-control rw-input" id="price_month" name="price_month" value="{{ old('price_month', $product->price_month) }}"/> 
-                                                </div>               
+                                                    <input type="num" class="form-control rw-input price-group" id="price_month" name="price_month" value="{{ old('price_month', $product->price_month) }}"/> 
+                                                </div>              
                                             </div> 
+                                                                                     
                                             <div class="card-header bg-light border-light">  
                                                 <h5> {{__('rw_products.warranty_info')}}</h5>
                                             </div> 
@@ -456,10 +479,20 @@
     //(RW) Enable / Disable category selects when Parent empty / Not empty
 
     // CHECK ON INIT
+            var loanOrRent = $('#loan_or_rent option:selected').val();
             var pors = $('#pors option:selected').val();
             var group = $('#group option:selected').val();
             var category = $('#category option:selected').val();
             var subCategory = $('#sub_category option:selected').val();
+
+
+            // Disable price fields if loan 
+            if (loanOrRent == 1){
+                $(".price-group").prop('disabled', true); 
+                var loanText = "{{__('rw_products.loantext1')}} {{$parameter->loan_cost}} {{__('rw_products.loantext2')}}";
+                $('#loan_text').html(loanText);
+              
+            }
 
             if (pors !== "empty") {
                 $("#group").prop('disabled', false);
@@ -544,7 +577,22 @@
                 window.location.href = "{{URL::to('my-products/delete/' . $product->id )}}"
             });
 
-         
+    // CHECK ON CHANGE LOAN OR RENT (LOAN OR RENT)
+            $("#loan_or_rent").on('change', function() {
+                var loanOrRent = $('#loan_or_rent option:selected').val();
+                if(loanOrRent == 0){
+                    $(".price-group").prop('disabled', false);
+                    var loanOrRent = $('#loan_or_rent option:selected').val();
+                    var loanText = "";
+                    $('#loan_text').html(loanText);
+                } else {
+                    $(".price-group").prop('disabled', true);
+                    var loanOrRent = $('#loan_or_rent option:selected').val(); 
+                    var loanText = "{{__('rw_products.loantext1')}} {{$parameter->loan_cost}} {{__('rw_products.loantext2')}}";
+                    $('#loan_text').html(loanText);                   
+                }
+            });
+
     // CHECK ON CHANGE PRODUCT OR SERVICE (PORS)
             $("#pors").on('change', function() {
                 var RWCSRF = $('meta[name="csrf-token"]').attr('content');  
@@ -853,10 +901,6 @@
                 $(".alert-success").alert('close');
             });
         });
-
-// on error ajax error: function (data) {
-//                console.log('Error:', data);
- //           }
 
     </script>
 @endsection 

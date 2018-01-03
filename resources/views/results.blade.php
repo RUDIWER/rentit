@@ -80,9 +80,9 @@
                                     </div>
                                     <div class="col-md-5 rw-prd-text">                                        
                                         <h6 class="card-subtitle mb-2 text-muted"> {{ $product->sub_title }}</h6>
-                                        <p class="card-text">{{ $product->description }}</p><br>   
+                                        <p class="card-text" style="padding:1em;">{{ $product->description }}</p><br>   
                                          <div class="rw-bottom-text"> 
-                                            {{__('rw_results.available_on')}} 
+                                            {{__('rw_results.available_on')}}<br> 
                                             @if($product->available_mo == 1)
                                                 <b> {{__('rw_results.available_mo')}}</b>
                                             @endif
@@ -107,7 +107,11 @@
                                             
                                          </div>                                                                                                 
                                     </div>
-                                    <div class="col-md-4  rw-prd-price">  
+                                    @if(!$product->price_hour && !$product->price_day && !$product->price_week && !$product->price_month)
+                                        <div class="col-md-4  rw-prd-free"> 
+                                    @else 
+                                        <div class="col-md-4  rw-prd-price"> 
+                                    @endif 
                                         <table class="pull-right">
                                             @if(!$product->price_hour && !$product->price_day && !$product->price_week && !$product->price_month)
                                                 <a class="rw-p-price"><h5 class="rw-txt-right"><i class="material-icons rw-icons  rw-green"  style="font-size: 40px" >favorite</i><b>{{__('rw_results.for_free')}}</b></a></h5>
@@ -172,6 +176,7 @@
             </div>
         </div>
     </div>
+    
     <!-- Call to alertModal -->
 
     @component('/layouts/messageModal')

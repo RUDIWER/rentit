@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
 
     //RENTIT Routes
     Route::get('/rentit/step-1/{idProduct}', 'Rentit\RentitController@step1')->name('rentit.step1');
+    Route::post('/rentit/step-1/send/{idProduct}', 'Rentit\RentitController@send')->name('rentit.step1.send');
 
     // AJAX ROUTES
     //PRODUCT AJAX Routes

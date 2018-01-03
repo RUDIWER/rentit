@@ -34,7 +34,7 @@ return [
     'failed' => 'Deze combinatie van e-mailadres en wachtwoord is niet geldig.',
     'throttle' => 'Te veel mislukte pogingen. Probeer het over :seconds seconden nogmaals.',
     'save' => 'Bewaar',
-    'delete' => 'Verwijder',
+    'delete' => 'Wis',
     'pic_image_format' => 'Er kunnen alleen bestanden met .gif .png .jpg of .jpeg extentie gebruikt worden !!!',
     'pic_max_size' => 'Een afbeelding mag max. 2 MB groot zijn !!!',
     'pic_file_size' => 'Een afbeelding mag max. 2 MB groot zijn !!!',

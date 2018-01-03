@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Profile;
 use App\Models\Product;
 use App\Models\ProdCategory;
+use App\Models\Parameter;
 
 //use Session;
 
@@ -34,10 +35,11 @@ class ProductController extends Controller
         $product = new Product();
         $product->user_id = $userId;
         $porses = ProdCategory::where('parent_category_id', '=', 0)->get();
+        $parameter = Parameter::first();
         $groups = '';
         $isNew = 1;
 
-        return view('products.productForm', compact('product', 'porses', 'userId', 'user', 'profile', 'isNew'));
+        return view('products.productForm', compact('product', 'porses', 'userId', 'user', 'profile', 'parameter', 'isNew'));
     }
 
     public function edit($idProduct)
@@ -50,9 +52,10 @@ class ProductController extends Controller
         $groups = ProdCategory::where('parent_category_id', '=', $product->pors)->get();
         $categories = ProdCategory::where('parent_category_id', '=', $product->group)->get();
         $subCategories = ProdCategory::where('parent_category_id', '=', $product->category)->get();
+        $parameter = Parameter::first();
         $isNew = 0;
 
-        return view('products.productForm', compact('product', 'porses', 'groups', 'categories', 'subCategories', 'userId', 'user', 'profile', 'isNew'));
+        return view('products.productForm', compact('product', 'porses', 'groups', 'categories', 'subCategories', 'userId', 'user', 'profile', 'parameter', 'isNew'));
     }
 
     public function view($idProduct)

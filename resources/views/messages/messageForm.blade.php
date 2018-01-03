@@ -12,7 +12,7 @@
                             <div class="row h-100 justify-content-center align-items-center"> 
                                 <i class="material-icons" style="font-size: 40px">contact_mail</i>  
                                 &nbsp  
-                                {{__('rw_login.contact_title')}} {{ $receiver->nickname }}   
+                                {{__('rw_login.contact_title')}}  
                             </div>
                         </h5>
                     </div>
@@ -43,6 +43,9 @@
                                 <h6 class="card-subtitle mb-2 text-muted">{{$title}}</h6>
                             </div>
                         </div> 
+                        <div class="form-row">
+                            <div class="form-group col-md-12">                              
+                                <label for="mailto" class="col-form-label text-primary">{{__('rw_messaging.mail_to')}} {{ $receiver->nickname }}</label>     
                         <div class="form-row">
                             <div class="form-group col-md-12">                              
                                 <label for="message" class="col-form-label text-primary">{{__('rw_login.mail_text')}}</label>

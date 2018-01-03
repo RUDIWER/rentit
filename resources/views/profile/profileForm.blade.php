@@ -38,21 +38,21 @@
                         <nav class="nav nav-tabs" id="profileTab" role="tablist">
                             <a class="nav-item nav-link active"  style="padding:5px;" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="true">
                                 <span class = "rw-icons"> 
-                                    <i class="material-icons" style="text-align:center;">info</i>
+                                    <i class="material-icons" style="text-align:center; font-size: 35px">info</i>
                                     <span class="rw-desktop">{{__('rw_profile.profile')}}</span>
                                 </span>
                             </a>
                             &nbsp
                             <a class="nav-item nav-link"  style="padding:5px;" id="nav-photo-tab" data-toggle="tab" href="#nav-photo" role="tab" aria-controls="nav-photo" aria-selected="true">
                                 <span class = "rw-icons"> 
-                                    <i class="material-icons" style="text-align:center;">photo_camera</i>
+                                    <i class="material-icons" style="text-align:center;  font-size: 35px">photo_camera</i>
                                     <span class="rw-desktop">{{__('rw_profile.photo')}}</span>
                                 </span>
                             </a>
                             &nbsp
                             <a class="nav-item nav-link"  style="padding:5px;" id="nav-user-tab" data-toggle="tab" href="#nav-user" role="tab" aria-controls="nav-user" aria-selected="true">
                                 <span class = "rw-icons"> 
-                                    <i class="material-icons" style="text-align:center;">verified_user</i>
+                                    <i class="material-icons" style="text-align:center;  font-size: 35px">verified_user</i>
                                     <span class="rw-desktop">{{__('rw_profile.user')}}</span>
                                 </span>
                             </a>

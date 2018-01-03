@@ -72,4 +72,9 @@ return [
     'price_warning' => 'Indien U een bepaalde periode niet wenst te verhuren laat U het veld leeg !',
     'price_warning2' => 'bv : U verhuurt niet per uur prijs / uur -> leeglaten.',
     'price_warning3' => 'Indien U nergens een prijs vermeld leent U het product GRATIS uit !',
+    'loanorrent' => 'Uitlenen of verhuren ?',
+    'loan' => 'Uitlenen',
+    'loantext1' => 'Er wordt enkele een administratieve kost twv.',
+    'loantext2' => 'euro betaald door de persoon die de goederen of diensten ontvangt !',
+    'rent' => 'Verhuren'
 ];

@@ -54,6 +54,10 @@ a:link    {
     font-weight:      bold;
 } 
 
+textarea {
+    line-height: 150%;
+}
+
 
 .btn-bd-purple {
     &:hover,
@@ -64,7 +68,11 @@ a:link    {
     }
 }
 
-
+.container {
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    font-size: 1.2em;
+}
 
 .rw-orange { 
     color: #ff5733;
@@ -75,7 +83,7 @@ a:link    {
 }
 
 .rw-green {
-    color: #44c90f;
+    color:#3cb30d;
 }
 
 .rw-red {
@@ -142,6 +150,7 @@ a:link    {
     font-family: 'Raleway', sans-serif;
     font-weight: bold;
     font-size: 1.2em;
+    line-height: 150%;
 }
 
 .rw-scrolly {
@@ -158,6 +167,12 @@ a:link    {
 
 .rw-prd-price {
     color: #ff5733; 
+    padding-top: 1em;
+    padding-right: 2em;
+}
+
+.rw-prd-free {
+    color: #3cb30d; 
     padding-top: 1em;
     padding-right: 2em;
 }
@@ -187,8 +202,9 @@ a:link    {
 .rw-bottom-text {
     position: absolute;
     bottom: 0;
-    padding-bottom: 1em;
-    padding-top: 1em;
+    padding: 1em;
+    margin: 1em;
+    padding-left: 0em;
 }
 
 .rw-card-hover:hover {

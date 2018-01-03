@@ -7,7 +7,7 @@ return [
     |
     */
 
-    'fromto' => 'Conversatie',
+    'fromto' => 'Van',
     'subject' => 'Onderwerp',
     'date' => 'Datum',
     'title_label' => 'Onderwerp:',
@@ -22,11 +22,12 @@ return [
     'zero_records' => 'Er zijn momenteel geen berichten !',
     'alert' => 'OPGELET !!!',
     'alert_message' => 'U kan geen boodschap naar U zelf sturen !!!',
-    'delete' => 'Verwijder',
+    'delete' => 'Wis',
     'del-mail' => 'Bent U zeker dat U dit bericht definitief wenst te verwijderen ?',
     'conversation' => 'Volledig gesprek weergeven',
     'conversation_title' => 'Volledig Gesprek',
     'from_me' => 'van mij',
     'from' => 'Van',
-    'to_me' => 'mij'
+    'to_me' => 'mij',
+    'mail_to' => 'Bericht voor:',
 ];
