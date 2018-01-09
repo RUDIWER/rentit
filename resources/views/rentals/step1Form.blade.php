@@ -2,13 +2,13 @@
 
 @section('content')
     <div class="container h-100">
-        <form id="step1Form" class="form" method="POST" enctype="multipart/form-data"  action="/rentit/step-1/send/{{ $product->id }}">
+        <form id="step1Form" class="form" method="POST" enctype="multipart/form-data"  action="/rentals/step-1/send/{{ $product->id }}">
         {{ csrf_field() }}
             <input type="hidden" id="price_hour" name="price_hour" value="{{ $product->price_hour }}"/> 
-            <input type="hidden" id="price_day" name="price_day" value="{{ $product->price_day }}"/> 
+            <input type="hidden" id="price_day" name="price_day" value="{{$product->price_day }}"/> 
             <input type="hidden" id="price_week" name="price_week" value="{{ $product->price_week }}"/> 
             <input type="hidden" id="price_month" name="price_month" value="{{ $product->price_month }}"/> 
-            <input type="hidden" id="commission" name="commission" value="{{ $commission }}"/> 
+            <input type="hidden" id="commission" name="commission" value="{{ $commission_procent }}"/> 
 
             <input type="hidden" id="available_mo" name="available_mo" value="{{ $product->available_mo }}"/> 
             <input type="hidden" id="available_tue" name="available_tue" value="{{ $product->available_tue }}"/> 
@@ -20,6 +20,8 @@
             <input type="hidden" id="loan_or_rent" name="loan_or_rent" value="{{ $product->loan_or_rent }}"/> 
 
             <input type="hidden" id="end_date_input" name="end_date_input"/> 
+            <input type="hidden" id="end_date" name="end_date"/> 
+            <input type="hidden" id="end_time" name="end_time"/> 
 
             <div class="row justify-content-md-centerrow justify-content-md-center">
                 <div class="col-lg-12">
@@ -29,7 +31,11 @@
                                 <div class="row h-100 justify-content-center align-items-center"> 
                                     <i class="material-icons" style="font-size: 40px">add_shopping_cart</i>  
                                     &nbsp  
-                                    {{__('rw_rentit.step1_title')}}  
+                                    @if(!$product->price_hour && !$product->price_day && !$product->price_week && !$product->price_month)
+                                        {{__('rw_rentit.step1_loan_title')}} 
+                                    @else
+                                        {{__('rw_rentit.step1_rent_title')}} 
+                                    @endif 
                                 </div>
                             </h5>
                         </div>
@@ -48,11 +54,12 @@
                         </div>
                         <br>
                 <!-- CARD BODY -->
-                        <div class="card-body"> 
+                        <div class="card-body rw-scrolly"> 
                             <div class="alert alert-info alert-block">  
                                 <i class="material-icons" style="font-size:30px; vertical-align: middle;">help</i>
                                 {{__('rw_rentit.more_info')}}
                             </div>
+                            @include('/layouts/flash-messages')
                             <div class="row">
                                 <div class="col-md-5">
                                     <b><label class="col-form-label text-primary">{{__('rw_rentit.what_to_rent')}}</label></b>
@@ -63,7 +70,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-5">
-                                    <b><label class="col-form-label text-primary">{{__('rw_rentit.rent_person')}}</label></b>
+                                    @if(!$product->price_hour && !$product->price_day && !$product->price_week && !$product->price_month)
+                                        <b><label class="col-form-label text-primary">{{__('rw_rentit.loan_person')}}</label></b>
+                                    @else
+                                        <b><label class="col-form-label text-primary">{{__('rw_rentit.rent_person')}}</label></b>
+                                    @endif
                                 </div>
                                 <div class="col-md-7">
                                     <b style="  font-size: 1.2em;">{{ $product->user->nickname }} {{__('rw_rentit.from')}} {{ $product->user->profile->addr1_city }} ({{ $product->user->profile->addr1_postcode }})  {{ $product->user->profile->addr1_country }}  </b>
@@ -71,7 +82,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-5">
-                                    <b><label class="col-form-label text-primary">{{__('rw_rentit.rent_person_state')}}</label></b>
+                                    @if(!$product->price_hour && !$product->price_day && !$product->price_week && !$product->price_month)
+                                        <b><label class="col-form-label text-primary">{{__('rw_rentit.loan_person_state')}}</label></b>
+                                    @else
+                                        <b><label class="col-form-label text-primary">{{__('rw_rentit.rent_person_state')}}</label></b>
+                                    @endif
                                 </div>
                                 <div class="col-md-7">
                                     <b style="  font-size: 1.2em;"> 
@@ -85,6 +100,39 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-5">
+                                    <b><label class="col-form-label text-primary">{{__('rw_rentit.available_at')}}</label></b>
+                                </div>
+                                <div class="col-md-7 rw-blue">
+                                    <b style="  font-size: 1.2em;">
+                                        <div> 
+                                          
+                                            @if($product->available_mo == 1)
+                                                <b> {{__('rw_results.available_mo')}}</b>
+                                            @endif
+                                            @if($product->available_tue == 1)
+                                                <b> {{__('rw_results.available_tue')}}</b>
+                                            @endif
+                                            @if($product->available_wed == 1)
+                                                <b> {{__('rw_results.available_wed')}}</b>
+                                            @endif
+                                            @if($product->available_th == 1)
+                                                <b> {{__('rw_results.available_th')}}</b>
+                                            @endif
+                                            @if($product->available_fr == 1)
+                                                <b> {{__('rw_results.available_fr')}}</b>
+                                            @endif
+                                            @if($product->available_sat == 1)
+                                                <b> {{__('rw_results.available_sat')}}</b>
+                                            @endif
+                                            @if($product->available_sun == 1)
+                                                <b> {{__('rw_results.available_sun')}}</b>
+                                            @endif
+                                        </div>        
+                                    </b>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-5">
                                     <b><label class="col-form-label text-primary">{{__('rw_rentit.back_date')}}</label></b>
                                 </div>
                                 <div class="col-md-7 rw-red">
@@ -92,7 +140,6 @@
                                 </div>
                             </div>
                             <hr>
-                            <br>
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-7">
@@ -105,20 +152,24 @@
                                         <hr>
                                         <form class="form" role="form" name="step1Form" id="step1Form" method="POST" enctype="multipart/form-data"  action="/rentit/step-1/save">        
                                             <div class="form-row">
-                                                <div class="form-group col-md-5">                              
-                                                    <label for="start_date" class="col-form-label text-primary">{{__('rw_rentit.start_date')}}</label>
-                                                    <input type="date" class="form-control rw-input calc-field " id="start_date" name="start_date" required value="{{ old('start_date') }}"/> 
+                                                <div class="form-group col-md-5">
+                                                    @if(!$product->price_hour && !$product->price_day && !$product->price_week && !$product->price_month)
+                                                        <label for="start_date" class="col-form-label text-primary">{{__('rw_rentit.start_date_loan')}}</label>
+                                                    @else
+                                                        <label for="start_date" class="col-form-label text-primary">{{__('rw_rentit.start_date')}}</label>
+                                                    @endif
+                                                    <input type="date" class="form-control rw-input calc-field " id="start_date" name="start_date" required/> 
                                                 </div>
                                                 <div class="form-group col-md-4">                              
                                                     <label for="start_time" class="col-form-label text-primary">{{__('rw_rentit.start_time')}}</label>
-                                                    <input type="time" class="form-control rw-input calc-field" id="start_time" name="start_time" required value="{{ old('start_time') }}"/> 
+                                                    <input type="time" class="form-control rw-input calc-field" id="start_time" name="start_time" required/> 
                                                 </div>
                                             </div>
                                             @if($product->price_hour > 0 || $product->loan_or_rent == 1)
                                                 <div class="form-row">  
                                                     <div class="form-group col-md-4 hours-group">                              
                                                         <label for="hours" class="col-form-label text-primary">{{__('rw_rentit.quant_hours')}}</label>
-                                                        <input type="number" min="0" max="24" class="form-control rw-input calc-field" id="hours" name="hours" value="{{ old('end_date') }}"/> 
+                                                        <input type="number" min="0" max="24" class="form-control rw-input calc-field" id="hours" name="hours"/> 
                                                     </div>
                                                 </div>
                                             @endif
@@ -126,7 +177,7 @@
                                                 <div class="form-row"> 
                                                     <div class="form-group col-md-4 days-group">                              
                                                         <label for="days" class="col-form-label text-primary">{{__('rw_rentit.quant_days')}}</label>
-                                                        <input type="number" min="0" max="7" class="form-control rw-input calc-field" id="days" name="days" value="{{ old('end_date') }}"/> 
+                                                        <input type="number" min="0" max="7" class="form-control rw-input calc-field" id="days" name="days"/> 
                                                     </div>
                                                 </div>
                                             @endif
@@ -134,7 +185,7 @@
                                                 <div class="form-row"> 
                                                     <div class="form-group col-md-4 weeks-group">                              
                                                         <label for="weeks" class="col-form-label text-primary">{{__('rw_rentit.quant_weeks')}}</label>
-                                                        <input type="number" min="0" max="4" class="form-control rw-input calc-field" id="weeks" name="weeks" value="{{ old('end_date') }}"/> 
+                                                        <input type="number" min="0" max="4" class="form-control rw-input calc-field" id="weeks" name="weeks"/> 
                                                     </div>
                                                 </div>
                                             @endif
@@ -142,14 +193,18 @@
                                                 <div class="form-row"> 
                                                     <div class="form-group col-md-4 months-group">                              
                                                         <label for="months" class="col-form-label text-primary">{{__('rw_rentit.quant_months')}}</label>
-                                                        <input type="number" min="0" max="12" class="form-control rw-input calc-field" id="months" name="months" value="{{ old('end_date') }}"/> 
+                                                        <input type="number" min="0" max="12" class="form-control rw-input calc-field" id="months" name="months"/> 
                                                     </div>
                                                 </div>  
                                             @endif 
                                                    
                                             <div class="form-row">  
-                                                <div class="form-group col-md-12">                              
+                                                <div class="form-group col-md-12"> 
+                                                @if(!$product->price_hour && !$product->price_day && !$product->price_week && !$product->price_month)
+                                                    <label class="col-form-label text-primary">{{__('rw_rentit.info_loan')}}</label>
+                                                @else
                                                     <label class="col-form-label text-primary">{{__('rw_rentit.info')}}</label>
+                                                @endif
                                                     <textarea type="text" class="form-control rw-input" rows="5" id="rent_info" name="rent_info">{{ old('rent_info') }}</textarea> 
                                                 </div>
                                             </div> 
@@ -157,56 +212,86 @@
                                     </div>
                     <!-- PRICE INFO -->
                                     <div class="col-md-5">
-                                        <b>
-                                            <h5 class="rw-orange">
-                                                <i class="material-icons" style="font-size:30px; vertical-align: middle;">euro_symbol</i>
-                                                {{__('rw_rentit.price_info')}}
-                                            </h5>
-                                        </b>
+                                        @if(!$product->price_hour && !$product->price_day && !$product->price_week && !$product->price_month)
+                                            <b>
+                                                <h5 class="rw-green">
+                                                    <i class="material-icons" style="font-size:30px; vertical-align: middle;">favorite</i>
+                                                    {{__('rw_rentit.free_info')}}
+                                                </h5>
+                                            </b>
+                                        @else
+                                            <b>
+                                                <h5 class="rw-orange">
+                                                    <i class="material-icons" style="font-size:30px; vertical-align: middle;">euro_symbol</i>
+                                                    {{__('rw_rentit.price_info')}}
+                                                </h5>
+                                            </b>
+                                        @endif
                                         <hr>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <b><label class="col-form-label text-primary">{{__('rw_rentit.total_price')}}</label></b>
+                                        @if(!$product->price_hour && !$product->price_day && !$product->price_week && !$product->price_month)
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <b><label class="col-form-label text-primary">{{__('rw_rentit.admin_price')}}</label></b>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <b class = "pull-right" style="  font-size: 1.2em;">{{ $product->commission }}€</b>
+                                                </div>
                                             </div>
-                                            <div class="col-md-7">
-                                                <b class = "pull-right" style="  font-size: 1.2em;"><span id="total-price"></span></b>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <b><label class="col-form-label text-primary">{{__('rw_rentit.payable_site')}}</label></b>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <hr>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <b><h6 class="rw-blue">{{__('rw_rentit.exist_of')}}</h6></b>
+
+                                        @else
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <b><label class="col-form-label text-primary">{{__('rw_rentit.total_price')}}</label></b>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <b class = "pull-right" style="  font-size: 1.2em;"><span id="total-price"></span></b>
+                                                    <input type="hidden" id="total_price_field" name="total_price_field"/> 
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <b><label class="col-form-label text-primary">{{__('rw_rentit.deposit_label')}}</label></b>
-                                                <br>                                            
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <b><h6 class="rw-blue">{{__('rw_rentit.exist_of')}}</h6></b>
+                                                </div>
                                             </div>
-                                            <div class="col-md-7">
-                                                <b class = "pull-right" style="  font-size: 1.2em;"><span id="deposit"></span></b>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <b><label class="col-form-label text-primary">{{__('rw_rentit.deposit_label')}}</label></b>
+                                                    <br>                                            
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <b class = "pull-right" style="  font-size: 1.2em;"><span id="deposit"></span></b>
+                                                    <input type="hidden" id="deposit_field" name="deposit_field"/> 
+
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <b><label class="col-form-label text-primary">{{__('rw_rentit.payable_site')}}</label></b>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <b><label class="col-form-label text-primary">{{__('rw_rentit.payable_site')}}</label></b>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <b><label class="col-form-label text-primary">{{__('rw_rentit.balance_label')}}</label></b>
-                                                <br>                                            
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <b><label class="col-form-label text-primary">{{__('rw_rentit.balance_label')}}</label></b>
+                                                    <br>                                            
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <b class = "pull-right" style="  font-size: 1.2em;"><span id="balance"></span></b>
+                                                    <input type="hidden" id="balance_field" name="balance_field"/> 
+                                                </div>
                                             </div>
-                                            <div class="col-md-7">
-                                                <b class = "pull-right" style="  font-size: 1.2em;"><span id="balance"></span></b>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <b><label class="col-form-label text-primary">{{__('rw_rentit.payable_owner')}}</label></b>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <b><label class="col-form-label text-primary">{{__('rw_rentit.payable_owner')}}</label></b>
-                                            </div>
-                                        </div>
+                                        @endif
                                         <hr>
                                         @if($product->warranty_amount > 0)
                                             <div class="row">
@@ -216,10 +301,11 @@
                                                 </div>
                                                 <div class="col-md-7">
                                                     <b class = "pull-right" style="  font-size: 1.2em;">{{$product->warranty_amount}}€</b>
+                                                    <input type="hidden" id="warranty_field" name="warranty_field" value="{{$product->warranty_amount}}"/> 
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-12">   
                                                     <b><label class="col-form-label text-primary">{{__('rw_rentit.payable_owner')}}</label></b>
                                                 </div>
                                             </div>  
@@ -227,9 +313,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-footer"> 
-                        
                         </div>
                     </div>
                 </div>
@@ -366,8 +449,11 @@
                 deposit = (Math.round(deposit / factor) * factor).toFixed(2);
                 var balance = (totalPrice - deposit);
                 $('#total-price').html(totalPrice + "€");
+                $('#total_price_field').val(totalPrice);
                 $('#deposit').html(deposit + "€");
                 $('#balance').html(balance + "€");
+                $('#deposit_field').val(deposit);
+                $('#balance_field').val(balance);
 
                 var totalDays = (days + (weeks * 7) + (months * 30));
                 var startDateField = $('#start_date').val();
@@ -391,9 +477,12 @@
                 var dag2 = endDate.getDate(); // dag in getal
                 var maand = endDate.getMonth()+1; // +1 want js begint bij 0 te tellen
                 var jaar = endDate.getFullYear();
+                var phpEndDate = (jaar+"-"+maand+"-"+dag2);
 
                 var uur = endDate.getHours();
                 var minuten = endDate.getMinutes();
+                if(minuten == 0){minuten = '00';}
+                var phpEndTime = (uur+":"+minuten);
 
                 var maandarray = new Array('januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december');
                 var dagarray = new Array('zondag','maandag','dinsdag', 'woensdag', 'donderdag', 'vrijdag', 'zaterdag');
@@ -402,8 +491,16 @@
                 if(startDateField && startTimeField){
                     $('#back-date').html(nl_date);
                     $('#end_date_input').val(nl_date);
+                    $('#end_date').val(phpEndDate);
+                    $('#end_time').val(phpEndTime);
+
                 }
-            });  
+            }); 
+            
+            //(RW) Slide UP  alert success messages
+            $(".alert-success").fadeTo(2000, 500).slideUp(500, function(){
+                $(".alert-success").alert('close');
+            });    
         });
     </script>
 @endsection

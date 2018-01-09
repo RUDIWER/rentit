@@ -48,14 +48,22 @@
                                     <span class="badge badge-danger badge-pill">{{count( Auth::user()->notifications)}}</span>
                                 @endif
                             </a>
-                          
+                       
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="{{ url('/my-profile') }}">{{__('rw_login.profile')}}</a> 
-                                <a class="dropdown-item" href="{{ url('/my-products') }}">{{__('rw_login.products')}}</a>  
+                                <a class="dropdown-item" href="{{ url('/my-products') }}">{{__('rw_login.products')}}</a>      
                                 <a class="dropdown-item" href="{{ url('/my-messages/inbox') }}">{{__('rw_login.messages')}}&nbsp&nbsp&nbsp
-                                    @if(count( Auth::user()->notifications))
-                                        <span class="badge badge-danger badge-pill">{{count( Auth::user()->notifications)}}</span></a> 
+                                    @if(count( Auth::user()->notifications->where('type', 'App\Notifications\ReceivedMessage')))
+                                        <span class="badge badge-danger badge-pill">{{count( Auth::user()->notifications->where('type', 'App\Notifications\ReceivedMessage'))}}</span>
                                     @endif
+                                </a> 
+                                <a class="dropdown-item" href="{{ url('/my-rentings') }}">{{__('rw_login.rentings')}}</a>
+                                   
+                                <a class="dropdown-item" href="{{ url('/my-leasings') }}">{{__('rw_login.leasings')}}&nbsp&nbsp&nbsp
+                                    @if(count( Auth::user()->notifications->where('type', 'App\Notifications\ReceivedRent')))
+                                        <span class="badge badge-danger badge-pill">{{count( Auth::user()->notifications->where('type', 'App\Notifications\ReceivedRent'))}}</span>
+                                    @endif 
+                                </a> 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">

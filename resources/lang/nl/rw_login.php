@@ -54,5 +54,7 @@ return [
     'mail_text' => 'Uw bericht aan de verhuurder:',
     'send' => 'Verstuur',
     'messages' => 'Postvak in',
-    'needed' => 'aanmelden verplicht !'
+    'needed' => 'aanmelden verplicht !',
+    'rentings' => 'Gehuurd',
+    'leasings' => 'Verhuurd'
 ];

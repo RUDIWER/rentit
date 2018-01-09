@@ -31,7 +31,7 @@
             <!-- BUTTON BAR  -->
                         <div class="card-header rw-buttonbar" style="padding:5px;">  
                             <b>                      
-                                <a class="rw-icons rw-grey" href="{{ route('my-products.list') }}">
+                                <a class="rw-icons rw-grey" href="{{ route('my-products.myList') }}">
                                     <i class="material-icons">arrow_back</i> 
                                     {{__('rw_products.back')}} 
                                 </a>                                  

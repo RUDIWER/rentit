@@ -75,15 +75,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('message/delete/{id}/{sentBox}', 'Messages\MessageController@delete')->name('message.delete');
 
     // PRODUCT Routes to products from logged in user (slug only visible auth:id used to get profile)
-    Route::get('/my-products', 'Products\ProductController@list')->name('my-products.list');
+    Route::get('/products', 'Products\ProductController@list')->name('products.list');
+    Route::get('/my-products', 'Products\ProductController@myList')->name('my-products.myList');
     Route::get('/my-products/create', 'Products\ProductController@create')->name('my-products.create');
     Route::get('/my-products/edit/{id}', 'Products\ProductController@edit')->name('my-products.edit');
     Route::get('/my-products/delete/{id}', 'Products\ProductController@delete')->name('my-products.delete');
     Route::post('/my-products/save/{id}', 'Products\ProductController@save')->name('my-products.save');
 
-    //RENTIT Routes
-    Route::get('/rentit/step-1/{idProduct}', 'Rentit\RentitController@step1')->name('rentit.step1');
-    Route::post('/rentit/step-1/send/{idProduct}', 'Rentit\RentitController@send')->name('rentit.step1.send');
+    //RENTAL Routes
+    Route::get('/rentals/step-1/{idProduct}', 'Rentals\RentalController@step1')->name('rentals.step1');
+    Route::post('/rentals/step-1/send/{idProduct}', 'Rentals\RentalController@send')->name('rentals.step1.send');
+    Route::get('/my-rentings', 'Rentals\RentalController@Rentlist')->name('my-rentings.list');
+    Route::get('/my-leasings', 'Rentals\RentalController@Leaselist')->name('my-leasings.list');
 
     // AJAX ROUTES
     //PRODUCT AJAX Routes

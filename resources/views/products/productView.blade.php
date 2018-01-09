@@ -33,7 +33,11 @@
                             </div> 
                             <div class="col-md-6 pull-right rw-header">
                                 <button id="rentit" type="button" class="btn btn-large btn-outline-success pull-right">
-                                    <b class="rw-icons"><i class="material-icons">thumb_up</i>&nbsp  {{__('rw_products.rentit')}}</b>
+                                    @if(!$product->price_hour && !$product->price_day && !$product->price_week && !$product->price_month)
+                                        <b class="rw-icons"><i class="material-icons">thumb_up</i>&nbsp  {{__('rw_products.loanit')}}</b>
+                                    @else
+                                        <b class="rw-icons"><i class="material-icons">thumb_up</i>&nbsp  {{__('rw_products.rentit')}}</b>
+                                    @endif
                                 </button>
                             </div>
                         </div>
@@ -186,7 +190,7 @@
 			$(document).ready(function(){
             // On press Rentit buttonpweb
             $("#rentit").on('click', function() {
-                window.location.href = "{{URL::to('rentit/step-1/' . $product->id )}}"
+                window.location.href = "{{URL::to('rentals/step-1/' . $product->id )}}"
             });
 
             // Picture Gallery    

@@ -10,6 +10,8 @@ use App\Models\Profile;
 use App\Models\Product;
 use App\Models\Message;
 use App\Notifications\ReceivedMessage;
+use App\Mail\EmailNotification;
+use Illuminate\Support\Facades\Mail;
 
 class MessageController extends Controller
 {
@@ -100,6 +102,9 @@ class MessageController extends Controller
         // Notification
         $receiver->notify(new ReceivedMessage());
         //   session()->flash('msg', 'success');
+        // Send email to receive to remind on new mail
+        Mail::to($receiver->email)
+            ->send(new EmailNotification($messageSender));
         return redirect()->back()->withInput()->with('success', __('rw_profile.send'));
     }
 

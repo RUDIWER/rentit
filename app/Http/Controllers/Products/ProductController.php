@@ -27,6 +27,18 @@ class ProductController extends Controller
         return view('products.productList', compact('user', 'profile', 'products'));
     }
 
+    public function myList()
+    {
+        $userId = Auth::id();
+        $user = User::find($userId);
+        $profile = $user->profile;
+        $products = Product::where('user_id', '=', $userId)->get();
+
+        return view('products.productList', compact('user', 'profile', 'products'));
+    }
+
+
+
     public function create()
     {
         $userId = Auth::id();

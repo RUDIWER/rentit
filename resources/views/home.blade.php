@@ -3,6 +3,17 @@
 @section('content')
 <div class="container">
     <div class="row">
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-3">LORENto</h1>
+                <p class="lead">Het sociale Deel en verhuur platform</p>
+                <hr class="my-2">
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Meer info?</a>
+                </p>
+            </div>
+        </div>
+        
         <div class="col-md-8 col-md-offset-2">
             <div class="card card-primary">
                 <div class="card-header"><h4>{{__('rw_login.home_page')}}</h4></div>
